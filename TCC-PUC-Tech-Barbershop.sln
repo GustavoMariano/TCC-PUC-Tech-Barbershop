@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC-PUC-Tech-Barbershop.Admin", "TCC-PUC-Tech-Barbershop.Admin\TCC-PUC-Tech-Barbershop.Admin.csproj", "{0834C0A9-3D59-4702-926E-6ECC1F9B748C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3602F71D-2254-40A5-8268-057EEBB56874}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-UI", "01-UI", "{F51B1E06-931D-48DD-B1F5-007551580E02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{4C736B78-0EF9-405B-82B7-0C640EFB288F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Infra", "03-Infra", "{B2AD7DD7-E9CD-4A15-AA9A-4CAEDDC1F590}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC-PUC-Tech-Barbershop.Domain", "TCC-PUC-Tech-Barbershop.Domain\TCC-PUC-Tech-Barbershop.Domain.csproj", "{742D355C-C96C-44E2-A288-4CB739BAD725}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC-PUC-Tech-Barbershop.AntiCorruption", "TCC-PUC-Tech-Barbershop.AntiCorruption\TCC-PUC-Tech-Barbershop.AntiCorruption.csproj", "{F477F51F-F553-45E2-976E-4DD7841BC5FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{742D355C-C96C-44E2-A288-4CB739BAD725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{742D355C-C96C-44E2-A288-4CB739BAD725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{742D355C-C96C-44E2-A288-4CB739BAD725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{742D355C-C96C-44E2-A288-4CB739BAD725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F477F51F-F553-45E2-976E-4DD7841BC5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F477F51F-F553-45E2-976E-4DD7841BC5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F477F51F-F553-45E2-976E-4DD7841BC5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F477F51F-F553-45E2-976E-4DD7841BC5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0834C0A9-3D59-4702-926E-6ECC1F9B748C} = {F51B1E06-931D-48DD-B1F5-007551580E02}
+		{F51B1E06-931D-48DD-B1F5-007551580E02} = {0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}
+		{4C736B78-0EF9-405B-82B7-0C640EFB288F} = {0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}
+		{B2AD7DD7-E9CD-4A15-AA9A-4CAEDDC1F590} = {0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}
+		{742D355C-C96C-44E2-A288-4CB739BAD725} = {4C736B78-0EF9-405B-82B7-0C640EFB288F}
+		{F477F51F-F553-45E2-976E-4DD7841BC5FD} = {B2AD7DD7-E9CD-4A15-AA9A-4CAEDDC1F590}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {626F2970-B741-40B9-8E40-FB9F3D1BD412}
+	EndGlobalSection
+EndGlobal
