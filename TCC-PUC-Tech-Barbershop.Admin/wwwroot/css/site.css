@@ -43,7 +43,6 @@ p:before {
     clear: left;
 }
 
-
 .carousel-inner img {
     height: 32rem;
     width : auto; /* or 100% */
