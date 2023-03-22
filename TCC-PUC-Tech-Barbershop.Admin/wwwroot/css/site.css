@@ -1,18 +1,50 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+.fixarRodape {
+    background-color:white;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+}
+
+img {
+    float: right;
+}
+
+.content:before {    
+    content: ' ';
+    display: table;
+    width: 10em; /* <-- Change the current width size */
+}
+
+p:before {
+    content: "";
+    width: 10em;
+    display: block;
+    overflow: hidden;
+    clear: left;
+}
+
+
+.carousel-inner img {
+    height: 32rem;
+    width : auto; /* or 100% */
 }

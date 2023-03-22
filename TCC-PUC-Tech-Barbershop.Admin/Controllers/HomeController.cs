@@ -18,7 +18,7 @@ namespace TCC_PUC_Tech_Barbershop.Admin.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
