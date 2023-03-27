@@ -1,3 +1,4 @@
+/* General */
 html {
     font-size: 14px;
 }
@@ -17,22 +18,39 @@ body {
     margin-bottom: 60px;
 }
 
+img {
+    float: right;
+}
+
+/* General */
+/* Footer*/
+
 .fixarRodape {
-    background-color:white;
+    background-color: white;
     bottom: 0;
     position: fixed;
     width: 100%;
     text-align: center;
 }
 
-img {
-    float: right;
+/* Footer*/
+/* Index */
+
+.index-Brief {
+    text-align: center;
 }
 
-.content:before {    
+/* Index */
+/* About */
+
+.about-Title {
+    text-align: center;
+}
+
+.content:before {
     content: ' ';
     display: table;
-    width: 10em; /* <-- Change the current width size */
+    width: 10em;
 }
 
 p:before {
@@ -45,5 +63,7 @@ p:before {
 
 .carousel-inner img {
     height: 32rem;
-    width : auto; /* or 100% */
+    width: auto; /* or 100% */
 }
+
+/* About */
