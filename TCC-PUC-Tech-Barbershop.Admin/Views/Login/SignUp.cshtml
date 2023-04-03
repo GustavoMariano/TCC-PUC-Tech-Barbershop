@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<form id="SignUp">
+    <div class="form-group">
+        <label for="exampleInputEmail">Endereço de E-mail</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu e-mail">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword">Senha</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col">
+            <label for="exampleInputName">Nome</label>
+            <input type="text" class="form-control" placeholder="Nome">
+        </div>
+        <div class="col">
+            <label for="exampleInputName">Sobrenome</label>
+            <input type="text" class="form-control" placeholder="Sobrenome">
+        </div>
+    </div>
+
+    <div class="col">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+        <label for="exampleInputPhoneCellPhone">Telefone/Celular</label>
+        <input type="tel" name="phoneNumber" id="phoneNumber" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" placeholder="Telefone/Celular">
+        <script type="text/javascript">$("#phoneNumber").mask("(00) 0000-00009");</script>
+    </div>
+
+    <div class="text-center">
+        <div class="signUp-Submit">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignUpSubtmit"><button class="btn btn-primary">Cadastrar</button></a>
+        </div>
+    </div>
+</form>

@@ -26,10 +26,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Sobre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Schedule">Agendar atendimento</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Appointment" asp-action="BookAppointment">Agendar atendimento</a>
                         </li>
                     </ul>
                 </div>
+
+                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignUp"><button class="btn btn-light">Cadastrar</button></a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login"><button class="btn btn-dark">Entrar</button></a>
+
             </div>
         </nav>
     </header>
@@ -39,7 +43,7 @@
         </main>
     </div>
 
-    <div class="fixarRodape">
+    <div class="pinFooter">
         <footer class="border-top footer text-muted">
             &copy; 2023 - TCC PUC Engenharia de Software - Tech Barbershop - <a asp-area="" asp-controller="Home" asp-action="About">Sobre</a>
         </footer>

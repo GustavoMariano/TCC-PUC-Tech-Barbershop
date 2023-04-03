@@ -22,10 +22,40 @@ img {
     float: right;
 }
 
-/* General */
-/* Footer*/
+fieldset {
+    overflow: hidden
+}
 
-.fixarRodape {
+.some-class {
+    float: left;
+    clear: none;
+}
+
+label {
+    float: left;
+    clear: none;
+    display: block;
+    padding: 0px 1em 0px 8px;
+}
+
+input[type=radio],
+input.radio {
+    float: left;
+    clear: none;
+    margin: 2px 0 0 2px;
+}
+
+
+/* General */
+/* Layout */
+
+.layout-Login {
+    font-size:inherit;
+}
+
+/* Layout */
+/* Footer */
+.pinFooter {
     background-color: white;
     bottom: 0;
     position: fixed;
@@ -33,7 +63,7 @@ img {
     text-align: center;
 }
 
-/* Footer*/
+/* Footer */
 /* Index */
 
 .index-Brief {
@@ -67,3 +97,15 @@ p:before {
 }
 
 /* About */
+/* Login */
+
+.login-Login {
+    font-size: inherit;
+}
+
+/* Login */
+/* Book Appointments */
+
+
+
+/* Book Appointments */
