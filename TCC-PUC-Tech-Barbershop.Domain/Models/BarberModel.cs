@@ -1,21 +1,26 @@
-﻿using TCC_PUC_Tech_Barbershop.Domain.Shared;
+﻿using TCC_PUC_Tech_Barbershop.Domain.Enums;
+using TCC_PUC_Tech_Barbershop.Domain.Shared;
 
 namespace TCC_PUC_Tech_Barbershop.Domain.Models;
 
 public class BarberModel : PersonModule
 {
     public string Phone { get; set; }
-    public DateTime Birthday { get; set; }
-    public DateTime AdmissionDate { get; set; }
+    public string Email { get; set; }
+    public EBarber BarberLevel { get; set; }
     public List<AppointmentModel> Appointments { get; set; }
 
-    public BarberModel(int id, string name, string phone, DateTime birthday, DateTime admissionDate)
+    public BarberModel()
+    {        
+    }
+
+    public BarberModel(int id, string name, string phone, string email, EBarber barberLevel)
     {
         Id = id;
         Name = name;
         Phone = phone;
-        Birthday = birthday;
-        AdmissionDate = admissionDate;
+        Email = email;
+        BarberLevel = barberLevel;
     }
 
     public override string Validate()
@@ -42,12 +47,12 @@ public class BarberModel : PersonModule
                Id == barber.Id &&
                Name == barber.Name &&
                Phone == barber.Phone &&
-               Birthday == barber.Birthday &&
-               AdmissionDate == barber.AdmissionDate;
+               Email == barber.Email &&
+               BarberLevel == barber.BarberLevel;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Id, Name, Phone, Birthday, AdmissionDate);
+        return HashCode.Combine(Id, Name, Phone, Email, BarberLevel);
     }
 }
