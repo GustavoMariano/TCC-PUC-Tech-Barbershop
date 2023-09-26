@@ -1,4 +1,5 @@
 ﻿using TCC_PUC_Tech_Barbershop.Domain.AgendaModule;
+using TCC_PUC_Tech_Barbershop.Domain.AtendimentoModule;
 using TCC_PUC_Tech_Barbershop.Domain.ContatoModule;
 using TCC_PUC_Tech_Barbershop.Domain.EnderecoModule;
 using TCC_PUC_Tech_Barbershop.Domain.FormasPagamentoModule;
@@ -16,4 +17,5 @@ public class Barbeiro : Pessoa
     public Endereco Endereco { get; set; }
     public Agenda Agenda { get; set; }
     public FormasPagamento FormasAceitas { get; set; }
+    public List<Atendimento> Atendimentos { get; set; }
 }
