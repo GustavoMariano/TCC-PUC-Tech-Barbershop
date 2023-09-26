@@ -4,12 +4,12 @@ namespace TCC_PUC_Tech_Barbershop.Admin.Controllers;
 
 public class LoginController : Controller
 {
-    public IActionResult Login()
+    public IActionResult Entrar()
     {
         return View();
     }
 
-    public IActionResult SignUp()
+    public IActionResult Cadastrar()
     {
         return View();
     }

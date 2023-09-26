@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3602F71D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-UI", "01-UI", "{F51B1E06-931D-48DD-B1F5-007551580E02}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Domain", "02-Domain", "{7B959FD9-9C56-4C32-942B-78CF8F54298C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC-PUC-Tech-Barbershop.Domain", "TCC-PUC-Tech-Barbershop.Domain\TCC-PUC-Tech-Barbershop.Domain.csproj", "{28EF0B1B-32F9-4DE0-B195-74B23684D041}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,10 @@ Global
 		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0834C0A9-3D59-4702-926E-6ECC1F9B748C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28EF0B1B-32F9-4DE0-B195-74B23684D041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28EF0B1B-32F9-4DE0-B195-74B23684D041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28EF0B1B-32F9-4DE0-B195-74B23684D041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28EF0B1B-32F9-4DE0-B195-74B23684D041}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -28,6 +36,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0834C0A9-3D59-4702-926E-6ECC1F9B748C} = {F51B1E06-931D-48DD-B1F5-007551580E02}
 		{F51B1E06-931D-48DD-B1F5-007551580E02} = {0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}
+		{7B959FD9-9C56-4C32-942B-78CF8F54298C} = {0DA6D58C-7AF4-4579-9EAE-DF2272DBF518}
+		{28EF0B1B-32F9-4DE0-B195-74B23684D041} = {7B959FD9-9C56-4C32-942B-78CF8F54298C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {626F2970-B741-40B9-8E40-FB9F3D1BD412}
