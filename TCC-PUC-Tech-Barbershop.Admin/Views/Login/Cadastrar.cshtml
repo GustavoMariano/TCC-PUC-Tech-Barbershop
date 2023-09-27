@@ -6,11 +6,15 @@
 
     <h2>Dados de Login</h2>
 
-    <input type="radio" class="btn-check" name="options-outlined" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarCadastro(this)">
-    <label class="btn btn-outline-success" for="success-outlined">Cliente</label>
+    <div class="d-flex justify-content-center">
+        <input type="radio" class="btn-check" name="options-outlined" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarCadastro(this)">
+        <label class="btn btn-outline-success" for="success-outlined">Cliente</label>
 
-    <input type="radio" class="btn-check" name="options-outlined" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarCadastro(this)">
-    <label class="btn btn-outline-success" for="danger-outlined">Barbeiro</label>
+        <input type="radio" class="btn-check" name="options-outlined" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarCadastro(this)">
+        <label class="btn btn-outline-success" for="danger-outlined">Barbeiro</label>
+    </div>
+
+    <br />
 
     <div class="row">
         <div class="col">
@@ -140,6 +144,8 @@
         </div>
     </div>
 
+    <br />
+
     <div class="row">
         <div class="col-5">
             <label for="exampleInputName">Logradouro</label>
@@ -158,7 +164,7 @@
     <hr />
 
     <div class="d-flex justify-content-center">
-        <button class="btn btn-secondary">Cancelar</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
         <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="#">
             <button type="submit" class="btn btn-primary mx-2">Cadastrar</button>
         </a>
