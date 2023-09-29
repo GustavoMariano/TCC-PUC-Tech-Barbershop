@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,12 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Barbeiros" asp-action="Visualizar">Barbeiros</a>
                         </li>
-                        @* @if (Model.IsAuthenticated)
-                        { *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Agendamento" asp-action="AgendarAtendimento">Agendar atendimento</a>
                             </li>
-                        @* } *@                       
+                        }
                     </ul>
                 </div>
 

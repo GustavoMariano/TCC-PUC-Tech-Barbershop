@@ -26,7 +26,10 @@ public class LoginController : Controller
 
         // Verifica se o usuário existe
         if (user == null)
-            return NotFound(new { message = "Usuário ou senha inválidos" });
+        {
+            TempData["ErrorMessage"] = "Usuário ou senha inválidos";
+            return RedirectToAction("Entrar", "Login");
+        }
 
         // Gera o Token
         var token = TokenService.GenerateToken(user);
@@ -35,11 +38,7 @@ public class LoginController : Controller
         user.Senha = "";
 
         // Retorna os dados
-        return new
-        {
-            user = user,
-            token = token
-        };
+        return RedirectToAction("Index", "Home");
     }
 
     public IActionResult LoginCliente(Cliente cliente)
