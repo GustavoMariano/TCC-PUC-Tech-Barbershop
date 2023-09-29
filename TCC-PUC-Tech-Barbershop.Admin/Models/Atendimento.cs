@@ -1,4 +1,4 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Domain.AtendimentoModule;
+﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Atendimento
 {

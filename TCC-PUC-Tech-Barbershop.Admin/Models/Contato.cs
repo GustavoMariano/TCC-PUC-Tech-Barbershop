@@ -1,4 +1,4 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Domain.ContatoModule;
+﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Contato
 {

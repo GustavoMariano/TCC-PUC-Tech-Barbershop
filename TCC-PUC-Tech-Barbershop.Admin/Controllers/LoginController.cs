@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TCC_PUC_Tech_Barbershop.Domain.BarbeiroModule;
-using TCC_PUC_Tech_Barbershop.Domain.ClienteModule;
+using TCC_PUC_Tech_Barbershop.Admin.Models;
 
 namespace TCC_PUC_Tech_Barbershop.Admin.Controllers;
 

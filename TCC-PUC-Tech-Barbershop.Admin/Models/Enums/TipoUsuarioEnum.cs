@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace TCC_PUC_Tech_Barbershop.Domain.Enums;
+namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
-public enum ETipoPessoa
+public enum TipoUsuarioEnum
 {
     [Description("Cliente")]
     Cliente = 0,

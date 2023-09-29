@@ -1,4 +1,4 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Domain.ComentariosModule;
+﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Comentarios
 {

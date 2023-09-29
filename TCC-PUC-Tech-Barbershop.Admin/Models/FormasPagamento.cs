@@ -1,4 +1,4 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Domain.FormasPagamentoModule;
+﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class FormasPagamento
 {
