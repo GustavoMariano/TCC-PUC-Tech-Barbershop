@@ -18,7 +18,7 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult LoginCliente(ClienteModel cliente)
+    public IActionResult LoginCliente(Cliente cliente)
     {
         if (ModelState.IsValid)
         {
@@ -28,7 +28,7 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult LoginBarbeiro(BarbeiroModel barbeiro)
+    public IActionResult LoginBarbeiro(Barbeiro barbeiro)
     {
         if (ModelState.IsValid)
         {
@@ -38,7 +38,7 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastrarCliente(ClienteModel cliente)
+    public IActionResult CadastrarCliente(Cliente cliente)
     {
         if (ModelState.IsValid)
         {
@@ -48,7 +48,7 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastrarBarbeiro(BarbeiroModel barbeiro)
+    public IActionResult CadastrarBarbeiro(Barbeiro barbeiro)
     {
         if (ModelState.IsValid)
         {
