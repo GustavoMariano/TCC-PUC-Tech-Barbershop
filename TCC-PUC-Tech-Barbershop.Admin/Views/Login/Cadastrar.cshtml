@@ -176,11 +176,9 @@
     function mudarCadastro(radioButton) {
         var form = document.getElementById("formCadastrar");
 
-        if (radioButton.value === "cliente") {
+        if (radioButton.value === "cliente")
             form.action = "/Login/CadastrarCliente";
-        }
-        else if (radioButton.value === "barbeiro") {
+        else if (radioButton.value === "barbeiro")
             form.action = "/Login/CadastrarBarbeiro";
-        }
     }
 </script>

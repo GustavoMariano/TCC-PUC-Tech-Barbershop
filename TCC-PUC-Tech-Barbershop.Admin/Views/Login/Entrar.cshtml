@@ -36,11 +36,9 @@
     function mudarLogin(radioButton) {
         var form = document.getElementById("formLogin");
 
-        if (radioButton.value === "cliente") {
+        if (radioButton.value === "cliente")
             form.action = "/Login/LoginCliente";
-        } 
-        else if (radioButton.value === "barbeiro") {
+        else if (radioButton.value === "barbeiro")
             form.action = "/Login/LoginBarbeiro";
-        }
     }
 </script>

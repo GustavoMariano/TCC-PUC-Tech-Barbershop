@@ -5,7 +5,7 @@ using TCC_PUC_Tech_Barbershop.Domain.PessoaModule;
 
 namespace TCC_PUC_Tech_Barbershop.Domain.ClienteModule;
 
-public class Cliente : Pessoa
+public class Cliente : Usuario
 {
     public string Login { get; set; }
     public string Senha { get; set; }

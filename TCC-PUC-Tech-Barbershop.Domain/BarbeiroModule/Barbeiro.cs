@@ -8,7 +8,7 @@ using TCC_PUC_Tech_Barbershop.Domain.PessoaModule;
 
 namespace TCC_PUC_Tech_Barbershop.Domain.BarbeiroModule;
 
-public class Barbeiro : Pessoa
+public class Barbeiro : Usuario
 {
     public string Login { get; set; }
     public string Senha { get; set; }

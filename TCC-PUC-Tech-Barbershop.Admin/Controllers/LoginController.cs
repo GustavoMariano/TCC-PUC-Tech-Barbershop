@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TCC_PUC_Tech_Barbershop.Domain.BarbeiroModule;
 using TCC_PUC_Tech_Barbershop.Domain.ClienteModule;
 
