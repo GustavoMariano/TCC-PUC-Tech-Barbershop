@@ -8,10 +8,14 @@ public class Usuario
     public Contato Contato { get; set; }
     public Informacoes Informacoes { get; set; }
     public Endereco Endereco { get; set; }
-    public TipoUsuarioEnum tipoUsuario { get; set; }
+    public TipoUsuarioEnum TipoUsuario { get; set; }
 
     public List<Usuario> Usuarios { get; set; }
     public List<Barbeiro> Barbeiros { get; set;}
+
+    public Usuario()
+    {
+    }
 
     public Usuario(string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario)
     {
@@ -20,7 +24,7 @@ public class Usuario
         Contato = contato;
         Informacoes = informacoes;
         Endereco = endereco;
-        this.tipoUsuario = tipoUsuario;
+        this.TipoUsuario = tipoUsuario;
     }
 
     public void AdicionarBarbeiros()

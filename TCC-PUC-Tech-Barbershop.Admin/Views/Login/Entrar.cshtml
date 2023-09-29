@@ -2,15 +2,15 @@
     ViewData["Title"] = "Login";
 }
 
-<form id="formLogin" method="post" action="/Login/LoginCliente">
+<form id="formLogin" method="post" action="/Login/Autenticar">
     <h2>Login</h2>
 
     <div class="d-flex justify-content-center">
         <label><h4>Entrar como:</h4></label>
-        <input type="radio" class="btn-check" name="options-outlined" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarLogin(this)">
+        <input type="radio" class="btn-check" name="TipoUsuario" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarLogin(this)">
         <label class="btn btn-outline-success" for="success-outlined">Cliente</label>
 
-        <input type="radio" class="btn-check" name="options-outlined" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarLogin(this)">
+        <input type="radio" class="btn-check" name="TipoUsuario" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarLogin(this)">
         <label class="btn btn-outline-success" for="danger-outlined">Barbeiro</label>
     </div>
 
@@ -25,7 +25,7 @@
 
         <div class="d-flex justify-content-center">
             <button type="reset" class="btn btn-secondary">Limpar</button>
-            <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="Login">
+            <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="Autenticar">
                 <button type="submit" class="btn btn-primary mx-2">Entrar</button>
             </a>
         </div>
@@ -37,8 +37,8 @@
         var form = document.getElementById("formLogin");
 
         if (radioButton.value === "cliente")
-            form.action = "/Login/LoginCliente";
+            form.action = "/Login/Autenticar";
         else if (radioButton.value === "barbeiro")
-            form.action = "/Login/LoginBarbeiro";
+            form.action = "/Login/Autenticar";
     }
 </script>

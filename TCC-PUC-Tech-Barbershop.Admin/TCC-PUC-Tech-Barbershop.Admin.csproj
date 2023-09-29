@@ -5,10 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>TCC_PUC_Tech_Barbershop.Admin</RootNamespace>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.1" />
   </ItemGroup>
 
 </Project>
