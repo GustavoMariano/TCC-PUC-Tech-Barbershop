@@ -1,4 +1,6 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Usuario
 {
@@ -6,18 +8,20 @@ public class Usuario
     public string Login { get; set; }
     public string Senha { get; set; }    
     public Contato Contato { get; set; }
-    public Informacoes Informacoes { get; set; }
+    public Informacao Informacoes { get; set; }
     public Endereco Endereco { get; set; }
     public TipoUsuarioEnum TipoUsuario { get; set; }
 
+    [NotMapped]
     public List<Usuario> Usuarios { get; set; }
+    [NotMapped]
     public List<Barbeiro> Barbeiros { get; set;}
 
     public Usuario()
     {
     }
 
-    public Usuario(int id, string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario)
+    public Usuario(int id, string login, string senha, Contato contato, Informacao informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario)
     {
         Id = id;
         Login = login;

@@ -11,6 +11,10 @@ public class Endereco
     public string Bairro { get; set; }
     public string Cidade { get; set; }
 
+    public Endereco()
+    {
+    }
+
     public Endereco(string cep, string estado, string numero, string logradouro, string complemento, string bairro, string cidade)
     {
         Cep = cep;

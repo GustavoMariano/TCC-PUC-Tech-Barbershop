@@ -16,7 +16,7 @@ public class AtendimentoController : Controller
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
         // Verifique aqui se o model está corretamente preenchido com os dados do formulário.
-        var a = model.IdBarbeiro;
+        var a = model.Barbeiro.Id;
         // Retorna os dados
         return RedirectToAction("Index", "Home");
     }

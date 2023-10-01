@@ -1,6 +1,6 @@
 ﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
-public class Informacoes
+public class Informacao
 {
     public int Id { get; set; }
     public string Nome { get; set; }
@@ -8,7 +8,11 @@ public class Informacoes
     public string Descricao { get; set; }
     public string Sexo { get; set; }
 
-    public Informacoes(string nome, string sobrenome, string descricao, string sexo)
+    public Informacao()
+    {
+    }
+
+    public Informacao(string nome, string sobrenome, string descricao, string sexo)
     {
         Nome = nome;
         Sobrenome = sobrenome;
