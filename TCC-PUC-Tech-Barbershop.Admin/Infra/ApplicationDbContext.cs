@@ -17,4 +17,37 @@ public class ApplicationDbContext : DbContext
     public DbSet<Contato> Contatos { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
     public DbSet<Informacao> Informacoes { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        #region Atendimento
+        modelBuilder.Entity<Atendimento>()
+        .HasOne(a => a.Cliente)
+        .WithMany()
+        .HasForeignKey(a => a.ClienteId)
+        .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Atendimento>()
+            .HasOne(a => a.Barbeiro)
+            .WithMany()
+            .HasForeignKey(a => a.BarbeiroId)
+            .OnDelete(DeleteBehavior.NoAction);
+        #endregion Atendimento
+
+        #region Comentario
+        modelBuilder.Entity<Comentario>()
+        .HasOne(c => c.Cliente)
+        .WithMany()
+        .HasForeignKey(c => c.ClienteId)
+        .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Comentario>()
+            .HasOne(c => c.Barbeiro)
+            .WithMany()
+            .HasForeignKey(c => c.BarbeiroId)
+            .OnDelete(DeleteBehavior.NoAction);
+        #endregion
+    }
 }
