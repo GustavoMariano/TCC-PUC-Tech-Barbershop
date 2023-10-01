@@ -13,7 +13,7 @@ public class AtendimentoController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult<dynamic>> CadastrarAtendimento([Bind("IdBarbeiro, Data, Hora")] Atendimento model)
+    public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
         // Verifique aqui se o model está corretamente preenchido com os dados do formulário.
         var a = model.IdBarbeiro;
