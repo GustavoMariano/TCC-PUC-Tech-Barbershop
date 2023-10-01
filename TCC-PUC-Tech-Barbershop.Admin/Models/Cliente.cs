@@ -2,7 +2,7 @@
 
 public class Cliente : Usuario
 {
-    public Cliente(string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(login, senha, contato, informacoes, endereco, tipoUsuario)
+    public Cliente(int id, string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(id, login, senha, contato, informacoes, endereco, tipoUsuario)
     {
     }
 }

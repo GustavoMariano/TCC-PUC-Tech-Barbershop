@@ -12,7 +12,7 @@ public class BarbeirosController : Controller
     
     public IActionResult Visualizar()
     {
-        Usuario barbeiro = new Usuario("AA", "AA", null, null, null, TipoUsuarioEnum.Barbeiro);
+        Usuario barbeiro = new Usuario(0, "AA", "AA", null, null, null, TipoUsuarioEnum.Barbeiro);
         barbeiro.AdicionarBarbeiros();
         return View(barbeiro);
     }

@@ -7,7 +7,10 @@ public class Barbeiro : Usuario
     public List<Atendimento> Atendimentos { get; set; }
     public List<Barbeiro> _barbeiros = new List<Barbeiro>();
 
-    public Barbeiro(string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(login, senha, contato, informacoes, endereco, tipoUsuario)
+    //public Barbeiro(string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(login, senha, contato, informacoes, endereco, tipoUsuario)
+    //{
+    //}
+    public Barbeiro(int id, string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(id, login, senha, contato, informacoes, endereco, tipoUsuario)
     {
     }
 }
