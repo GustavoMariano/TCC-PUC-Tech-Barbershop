@@ -11,6 +11,7 @@ public class Usuario
     public Informacao Informacoes { get; set; }
     public Endereco Endereco { get; set; }
     public TipoUsuarioEnum TipoUsuario { get; set; }
+    public List<Atendimento> Atendimentos { get; set; }
 
     [NotMapped]
     public List<Usuario> Usuarios { get; set; }

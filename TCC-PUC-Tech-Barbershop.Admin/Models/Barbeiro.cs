@@ -9,13 +9,7 @@ public class Barbeiro : Usuario
     [NotMapped]
     public List<Comentario> Comentarios { get; set; }
     [NotMapped]
-    public List<Atendimento> Atendimentos { get; set; }
-    [NotMapped]
     public List<Barbeiro> _barbeiros = new List<Barbeiro>();
-
-    //public Barbeiro(string login, string senha, Contato contato, Informacoes informacoes, Endereco endereco, TipoUsuarioEnum tipoUsuario) : base(login, senha, contato, informacoes, endereco, tipoUsuario)
-    //{
-    //}
 
     public Barbeiro()
     {
