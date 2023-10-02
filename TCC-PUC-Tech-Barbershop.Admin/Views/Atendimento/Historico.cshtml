@@ -1,0 +1,53 @@
+﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+
+@{
+    ViewData["Title"] = "Histórico";
+}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+@foreach (var atendimento in Model.Atendimentos)
+{
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                @atendimento.Barbeiro.Informacoes.Nome
+                @atendimento.Barbeiro.Informacoes.Sobrenome
+                @atendimento.Barbeiro.Contato.Celular
+                | @atendimento.Data - @atendimento.Hora
+            </p>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#visualizarAtendimentoModal">
+                Visualizar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#editarAtendimentoModal">
+                Editar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#cancelarAtendimentoModal">
+                Cancelar
+            </button>
+        </div>
+    </div>
+    <hr />
+}
+
+<div id="detalhesAgendamentoContainer">
+    @Html.Partial("DetalhesAtendimento")
+</div>
+
+<div id="editarAgendamentoContainer">
+    @Html.Partial("EditarAtendimento")
+</div>
+
+<div id="cancelarAgendamentoContainer">
+    @Html.Partial("CancelarAtendimento")
+</div>

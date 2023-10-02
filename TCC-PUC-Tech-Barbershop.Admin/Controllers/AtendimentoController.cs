@@ -12,6 +12,18 @@ public class AtendimentoController : Controller
         return View(barbeiro);
     }
 
+    public IActionResult Historico()
+    {
+        Usuario atendimento = new(0, "AA", "AA", null, null, null, TipoUsuarioEnum.Cliente);
+        atendimento.AdicionarAtendimentos();
+        return View(atendimento);
+    }
+    
+    public IActionResult DetalhesAtendimento()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {

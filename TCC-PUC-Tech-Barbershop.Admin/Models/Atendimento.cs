@@ -13,4 +13,14 @@ public class Atendimento
     public Atendimento()
     {
     }
+
+    public Atendimento(string data, string hora, int clienteId, int barbeiroId, Cliente cliente, Barbeiro barbeiro)
+    {
+        Data = data;
+        Hora = hora;
+        ClienteId = clienteId;
+        BarbeiroId = barbeiroId;
+        Cliente = cliente;
+        Barbeiro = barbeiro;
+    }
 }

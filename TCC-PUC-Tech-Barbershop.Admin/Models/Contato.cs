@@ -6,6 +6,12 @@ public class Contato
     public string Celular { get; set; }
     public string Email { get; set; }
 
+    public Contato(string celular, string email)
+    {
+        Celular = celular;
+        Email = email;
+    }
+
     public Contato()
     {
     }
