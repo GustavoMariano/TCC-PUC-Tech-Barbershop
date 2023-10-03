@@ -7,14 +7,14 @@ public class Atendimento
     public string Hora { get; set; }
     public int ClienteId { get; set; }
     public int BarbeiroId { get; set; }
-    public Cliente Cliente{ get; set; }
-    public Barbeiro Barbeiro { get; set; }
+    public Usuario Cliente { get; set; }
+    public Usuario Barbeiro { get; set; }
 
     public Atendimento()
     {
     }
 
-    public Atendimento(string data, string hora, int clienteId, int barbeiroId, Cliente cliente, Barbeiro barbeiro)
+    public Atendimento(string data, string hora, int clienteId, int barbeiroId, Usuario cliente, Usuario barbeiro)
     {
         Data = data;
         Hora = hora;

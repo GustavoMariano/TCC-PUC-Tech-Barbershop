@@ -1,22 +1,28 @@
-﻿namespace TCC_PUC_Tech_Barbershop.Admin.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
+namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Informacao
 {
     public int Id { get; set; }
+    [Required(ErrorMessage = "Campo obrigatório.")]
     public string Nome { get; set; }
+    [Required(ErrorMessage = "Campo obrigatório.")]
     public string Sobrenome { get; set; }
-    public string Descricao { get; set; }
+    [Required(ErrorMessage = "Campo obrigatório.")]
     public string Sexo { get; set; }
+    public string? Descricao { get; set; }
 
     public Informacao()
     {
     }
 
-    public Informacao(string nome, string sobrenome, string descricao, string sexo)
+    public Informacao(string nome, string sobrenome, string? descricao, string sexo)
     {
         Nome = nome;
         Sobrenome = sobrenome;
-        Descricao = descricao;
         Sexo = sexo;
+        Descricao = descricao;
     }
 }

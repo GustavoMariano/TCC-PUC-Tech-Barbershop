@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 using TCC_PUC_Tech_Barbershop.Admin.Repositories;
 using TCC_PUC_Tech_Barbershop.Admin.Services;
@@ -7,6 +8,12 @@ namespace TCC_PUC_Tech_Barbershop.Admin.Controllers;
 
 public class LoginController : Controller
 {
+    private readonly ApplicationDbContext _dbContext;
+    public LoginController(ApplicationDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
+
     public IActionResult Entrar()
     {
         return View();
@@ -61,13 +68,36 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastrarCliente(Cliente cliente)
+    public IActionResult CadastrarCliente(Usuario cliente)
     {
         if (ModelState.IsValid)
         {
+
+            // Crie um objeto para o registro e preencha com os dados do modelo
+            var novoRegistro = new Cliente
+            {
+                // Preencha as propriedades com base nos campos do modelo
+                Login = cliente.Login,
+                Senha = cliente.Senha,
+                Contato = cliente.Contato,
+                Informacoes = cliente.Informacoes,
+                Endereco = cliente.Endereco,
+                TipoUsuario = cliente.TipoUsuario
+                // Preencha outras propriedades aqui...
+            };
+
+            // Adicione o novo registro ao DbContext
+            _dbContext.Usuarios.Add(novoRegistro);
+
+            // Salve as alterações no banco de dados
+            _dbContext.SaveChanges();
+
+            // Redirecione para uma página de sucesso ou outra página apropriada
             return RedirectToAction("Sucesso");
         }
-        return RedirectToAction("Sucesso");
+
+        // Se o modelo não for válido, retorne a página de formulário com erros
+        return View(cliente);
     }
 
     [HttpPost]

@@ -30,10 +30,10 @@ public class ApplicationDbContext : DbContext
         .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Atendimento>()
-            .HasOne(a => a.Barbeiro)
-            .WithMany()
-            .HasForeignKey(a => a.BarbeiroId)
-            .OnDelete(DeleteBehavior.NoAction);
+        .HasOne(a => a.Barbeiro)
+        .WithMany()
+        .HasForeignKey(a => a.BarbeiroId)
+        .OnDelete(DeleteBehavior.NoAction);
         #endregion Atendimento
 
         #region Comentario
@@ -44,10 +44,10 @@ public class ApplicationDbContext : DbContext
         .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Comentario>()
-            .HasOne(c => c.Barbeiro)
-            .WithMany()
-            .HasForeignKey(c => c.BarbeiroId)
-            .OnDelete(DeleteBehavior.NoAction);
+        .HasOne(c => c.Barbeiro)
+        .WithMany()
+        .HasForeignKey(c => c.BarbeiroId)
+        .OnDelete(DeleteBehavior.NoAction);
         #endregion
     }
 }
