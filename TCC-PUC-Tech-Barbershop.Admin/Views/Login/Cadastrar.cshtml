@@ -2,15 +2,15 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<form id="formCadastrar" method="post" action="/Login/CadastrarCliente">
+<form id="formCadastrar" method="post" action="/Login/CadastrarUsuario">
 
     <h2>Dados de Login</h2>
 
     <div class="d-flex justify-content-center">
-        <input type="radio" class="btn-check" name="options-outlined" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarCadastro(this)">
+        <input type="radio" class="btn-check" name="TipoUsuario" value="cliente" id="success-outlined" autocomplete="off" checked>
         <label class="btn btn-outline-success" for="success-outlined">Cliente</label>
 
-        <input type="radio" class="btn-check" name="options-outlined" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarCadastro(this)">
+        <input type="radio" class="btn-check" name="TipoUsuario" value="barbeiro" id="danger-outlined" autocomplete="off">
         <label class="btn btn-outline-success" for="danger-outlined">Barbeiro</label>
     </div>
 

@@ -1,19 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
 namespace TCC_PUC_Tech_Barbershop.Admin.Controllers;
 
 public class BarbeirosController : Controller
 {
-    public IActionResult Index()
+    private readonly ApplicationDbContext _dbContext;
+
+    public BarbeirosController(ApplicationDbContext dbContext)
     {
-        return View();
+        _dbContext = dbContext;
     }
-    
+
     public IActionResult Visualizar()
     {
-        Usuario barbeiro = new Usuario(0, "AA", "AA", null, null, null, TipoUsuarioEnum.Barbeiro);
-        barbeiro.AdicionarBarbeiros();
-        return View(barbeiro);
+        List<Usuario> barbeiros = _dbContext.Usuarios
+        .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+        .Include(u => u.Informacoes)
+        .Include(u => u.Endereco)
+        .Include(u => u.Contato)
+        .ToList();
+
+        Usuario usuario = new();
+
+        if (barbeiros != null)
+            usuario.Usuarios = barbeiros;
+
+        return View(usuario);
     }
 }

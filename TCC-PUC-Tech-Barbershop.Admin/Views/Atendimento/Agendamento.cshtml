@@ -21,7 +21,7 @@
         <div class="col-6">
             <div class="btn-group w-100">
                 <select class="btn btn-primary dropdown-toggle" name="Barbeiro.Id" id="Barbeiro">
-                    @foreach (var barbeiro in Model.Barbeiros)
+                    @foreach (var barbeiro in Model.Usuarios)
                     {
                         <option value="@barbeiro.Id">@barbeiro.Informacoes.Nome @barbeiro.Informacoes.Sobrenome</option>
                     }

@@ -68,36 +68,38 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastrarCliente(Usuario cliente)
+    public IActionResult CadastrarUsuario(Usuario cliente)
     {
-        if (ModelState.IsValid)
+        Usuario novoRegistro;
+        if (cliente.TipoUsuario == TipoUsuarioEnum.Cliente)
         {
-
-            // Crie um objeto para o registro e preencha com os dados do modelo
-            var novoRegistro = new Cliente
+            novoRegistro = new Cliente()
             {
-                // Preencha as propriedades com base nos campos do modelo
                 Login = cliente.Login,
                 Senha = cliente.Senha,
                 Contato = cliente.Contato,
                 Informacoes = cliente.Informacoes,
                 Endereco = cliente.Endereco,
                 TipoUsuario = cliente.TipoUsuario
-                // Preencha outras propriedades aqui...
             };
-
-            // Adicione o novo registro ao DbContext
-            _dbContext.Usuarios.Add(novoRegistro);
-
-            // Salve as alterações no banco de dados
-            _dbContext.SaveChanges();
-
-            // Redirecione para uma página de sucesso ou outra página apropriada
-            return RedirectToAction("Sucesso");
+        }
+        else
+        {
+            novoRegistro = new Barbeiro()
+            {
+                Login = cliente.Login,
+                Senha = cliente.Senha,
+                Contato = cliente.Contato,
+                Informacoes = cliente.Informacoes,
+                Endereco = cliente.Endereco,
+                TipoUsuario = cliente.TipoUsuario
+            };
         }
 
-        // Se o modelo não for válido, retorne a página de formulário com erros
-        return View(cliente);
+        _dbContext.Usuarios.Add(novoRegistro);
+        _dbContext.SaveChanges();
+
+        return RedirectToAction("Entrar", "Login");
     }
 
     [HttpPost]

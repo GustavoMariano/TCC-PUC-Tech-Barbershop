@@ -5,19 +5,25 @@
 }
 
 <div class="row">
-    @foreach (var usuario in Model.Barbeiros)
+    @if (Model.Usuarios != null)
     {
-        <div class="col-md-4">
-            <!-- Isso define o tamanho da coluna, ajuste conforme necessário -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">@usuario.Informacoes.Nome</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@usuario.Endereco.Bairro</h6>
-                    <p class="card-text">@usuario.Informacoes.Descricao</p>
-                    <a href="#" class="btn btn-secondary">Visualizar Perfil</a>
-                    <a href="#" class="btn btn-primary">Agendar</a>                    
+        foreach (var usuario in Model.Usuarios)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">@usuario.Informacoes.Nome</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@usuario.Endereco.Bairro</h6>
+                        <p class="card-text">@usuario.Informacoes.Descricao</p>
+                        <a href="#" class="btn btn-secondary">Visualizar Perfil</a>
+                        <a href="#" class="btn btn-primary">Agendar</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <h1>Ainda não temos barbeiros cadastrados.</h1>
     }
 </div>
