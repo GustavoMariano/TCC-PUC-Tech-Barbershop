@@ -2,7 +2,14 @@
     ViewData["Title"] = "Cadastrar";
 }
 
-<form id="formCadastrar" method="post" action="/Login/CadastrarUsuario">
+<form id="formCadastrar" method="post" action="/Login/CadastrarUsuario" enctype="multipart/form-data">
+
+    <h2>Imagem de Perfil</h2>
+
+    <div class="form-group">
+        <label for="profileImage">Selecione uma foto de perfil:</label>
+        <input type="file" class="form-control-file" id="profileImage" name="Imagem">
+    </div>
 
     <h2>Dados de Login</h2>
 
@@ -170,15 +177,3 @@
         </a>
     </div>
 </form>
-
-
-<script>
-    function mudarCadastro(radioButton) {
-        var form = document.getElementById("formCadastrar");
-
-        if (radioButton.value === "cliente")
-            form.action = "/Login/CadastrarCliente";
-        else if (radioButton.value === "barbeiro")
-            form.action = "/Login/CadastrarBarbeiro";
-    }
-</script>

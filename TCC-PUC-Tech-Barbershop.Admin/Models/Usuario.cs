@@ -11,6 +11,7 @@ public class Usuario
     [Required(ErrorMessage = "Campo obrigatório.")]
     public string Senha { get; set; }
     [Required(ErrorMessage = "Campo obrigatório.")]
+    public byte[]? Imagem { get; set; }
     public TipoUsuarioEnum TipoUsuario { get; set; }
 
     public Contato Contato { get; set; }

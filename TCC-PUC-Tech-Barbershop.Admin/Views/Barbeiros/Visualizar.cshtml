@@ -9,14 +9,15 @@
     {
         foreach (var usuario in Model.Usuarios)
         {
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">@usuario.Informacoes.Nome</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@usuario.Endereco.Bairro</h6>
-                        <p class="card-text">@usuario.Informacoes.Descricao</p>
-                        <a href="#" class="btn btn-secondary">Visualizar Perfil</a>
-                        <a href="#" class="btn btn-primary">Agendar</a>
+            <div class="col-md-3">
+                <div class="card-group mb-3">
+                    <div class="card">
+                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">@usuario.Informacoes.Nome</h5>
+                            <p class="card-text">@usuario.Informacoes.Descricao</p>
+                            <p class="card-text"><small class="text-muted">@usuario.Endereco.Bairro</small></p>
+                        </div>
                     </div>
                 </div>
             </div>
