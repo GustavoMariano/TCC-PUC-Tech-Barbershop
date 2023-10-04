@@ -30,4 +30,16 @@ public class BarbeirosController : Controller
 
         return View(usuario);
     }
+
+    [HttpGet]
+    public IActionResult SelecionarPorId(int id)
+    {
+        var barbeiro = _dbContext.Usuarios
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .FirstOrDefault(u => u.Id == id);
+
+        return PartialView("_DetalhesPerfil", barbeiro);
+    }
 }

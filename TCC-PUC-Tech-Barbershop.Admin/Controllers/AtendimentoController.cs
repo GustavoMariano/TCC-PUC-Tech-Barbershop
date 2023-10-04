@@ -18,11 +18,7 @@ public class AtendimentoController : Controller
         atendimento.AdicionarAtendimentos();
         return View(atendimento);
     }
-    
-    public IActionResult DetalhesAtendimento()
-    {
-        return View();
-    }
+
 
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
