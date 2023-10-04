@@ -25,7 +25,7 @@ public class BarbeirosController : Controller
 
         Usuario usuario = new();
 
-        if (barbeiros != null)
+        if (barbeiros.Count() > 0)
             usuario.Usuarios = barbeiros;
 
         return View(usuario);
