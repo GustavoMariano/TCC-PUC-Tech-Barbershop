@@ -1,10 +1,4 @@
-﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
-
-@{
-    ViewData["Title"] = "Visualizar Barbeiros";
-}
-
-<div class="row">
+﻿<div class="row">
     @if (Model.Usuarios != null)
     {
         foreach (var usuario in Model.Usuarios)
@@ -12,7 +6,14 @@
             <div class="col-md-3">
                 <div class="card-group mb-3">
                     <div class="card">
-                        <img class="card-img-top" src="..." alt="Card image cap">
+                        @if (usuario.Imagem != null && usuario.Imagem.Length > 0)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(usuario.Imagem)" alt="Card image cap" id="imagemUsuario" style="max-width: 610px; max-height: 610px;">
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="..." alt="Card image cap">
+                        }
                         <div class="card-body">
                             <h5 class="card-title">@usuario.Informacoes.Nome</h5>
                             <p class="card-text">@usuario.Informacoes.Descricao</p>

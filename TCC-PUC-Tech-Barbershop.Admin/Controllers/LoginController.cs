@@ -68,14 +68,14 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public IActionResult CadastrarUsuario(Usuario cliente)
+    public IActionResult CadastrarUsuario(Usuario cliente, IFormFile Imagem)
     {
         Usuario novoRegistro;
+
         if (cliente.TipoUsuario == TipoUsuarioEnum.Cliente)
         {
             novoRegistro = new Cliente()
             {
-                
                 Login = cliente.Login,
                 Senha = cliente.Senha,
                 Contato = cliente.Contato,
@@ -83,22 +83,6 @@ public class LoginController : Controller
                 Endereco = cliente.Endereco,
                 TipoUsuario = cliente.TipoUsuario
             };
-
-            if(cliente.Imagem != null)
-                novoRegistro.Imagem = cliente.Imagem;
-            else
-            {
-                string imagePath = Path.Combine($"{Directory.GetCurrentDirectory()}/wwwroot/img/semFoto.png");
-
-                using (FileStream fs = new FileStream(imagePath, FileMode.Open))
-                {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        fs.CopyTo(ms);
-                        novoRegistro.Imagem = ms.ToArray();
-                    }
-                }
-            }
         }
         else
         {
@@ -111,6 +95,28 @@ public class LoginController : Controller
                 Endereco = cliente.Endereco,
                 TipoUsuario = cliente.TipoUsuario
             };
+        }
+
+        if (Imagem != null)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Imagem.CopyTo(ms);
+                novoRegistro.Imagem = ms.ToArray();
+            }
+        }
+        else
+        {
+            string imagePath = Path.Combine($"{Directory.GetCurrentDirectory()}/wwwroot/img/semFoto.png");
+
+            using (FileStream fs = new FileStream(imagePath, FileMode.Open))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    fs.CopyTo(ms);
+                    novoRegistro.Imagem = ms.ToArray();
+                }
+            }
         }
 
         _dbContext.Usuarios.Add(novoRegistro);
