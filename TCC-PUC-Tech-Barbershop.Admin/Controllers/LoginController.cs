@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
-using TCC_PUC_Tech_Barbershop.Admin.Repositories;
-using TCC_PUC_Tech_Barbershop.Admin.Services;
 
 namespace TCC_PUC_Tech_Barbershop.Admin.Controllers;
 
@@ -24,47 +22,19 @@ public class LoginController : Controller
         return View();
     }
 
-    [Route("Login/Autenticar")]
     [HttpPost]
-    public async Task<ActionResult<dynamic>> Autenticar(Usuario model)
+    public IActionResult LoginUsuario(Usuario usuario)
     {
-        // Recupera o usuário
-        var user = UsuarioRepository.Get(model.Login, model.Senha);
+        var user = _dbContext.Usuarios.FirstOrDefault(u => u.Login == usuario.Login && u.Senha == usuario.Senha);
 
-        // Verifica se o usuário existe
-        if (user == null)
+        if (user != null)
+            return RedirectToAction("Index", "Home");
+        else
         {
-            TempData["ErrorMessage"] = "Usuário ou senha inválidos";
-            return RedirectToAction("Entrar", "Login");
+            ModelState.AddModelError(string.Empty, "Credenciais inválidas. Verifique seu login e senha.");
+
+            return View("Entrar", usuario);
         }
-
-        // Gera o Token
-        var token = TokenService.GenerateToken(user);
-
-        // Oculta a senha
-        user.Senha = "";
-
-        // Retorna os dados
-        return RedirectToAction("Index", "Home");
-    }
-
-    public IActionResult LoginCliente(Cliente cliente)
-    {
-        if (ModelState.IsValid)
-        {
-            return RedirectToAction("Sucesso");
-        }
-        return RedirectToAction("Sucesso");
-    }
-
-    [HttpPost]
-    public IActionResult LoginBarbeiro(Barbeiro barbeiro)
-    {
-        if (ModelState.IsValid)
-        {
-            return RedirectToAction("Sucesso");
-        }
-        return RedirectToAction("Sucesso");
     }
 
     [HttpPost]

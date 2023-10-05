@@ -1,44 +1,29 @@
-﻿@{
+﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+
+@{
     ViewData["Title"] = "Entrar";
 }
 
-<form id="formLogin" method="post" action="/Login/Autenticar">
-    <h2>Login</h2>
+@using (Html.BeginForm("LoginUsuario", "Login", FormMethod.Post))
+{
+    <form id="formLogin" method="post" action="/Login/LoginUsuario">
+        <h2>Login</h2>
 
-    <div class="d-flex justify-content-center">
-        <label><h4>Entrar como:</h4></label>
-        <input type="radio" class="btn-check" name="TipoUsuario" value="cliente" id="success-outlined" autocomplete="off" checked onchange="mudarLogin(this)">
-        <label class="btn btn-outline-success" for="success-outlined">Cliente</label>
+        <div class="align-content-center">
+            <label for="exampleInputUsuario">Usuário</label>
+            <input type="text" class="form-control" id="exampleInputUsuario" placeholder="Usuário" name="Login">
 
-        <input type="radio" class="btn-check" name="TipoUsuario" value="barbeiro" id="danger-outlined" autocomplete="off" onchange="mudarLogin(this)">
-        <label class="btn btn-outline-success" for="danger-outlined">Barbeiro</label>
-    </div>
+            <label for="exampleInputPassword1">Senha</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <br />
 
-    <div class="align-content-center">
-        <label for="exampleInputUsuario">Usuário</label>
-        <input type="text" class="form-control" id="exampleInputUsuario" placeholder="Usuário" name="Login">
-
-        <label for="exampleInputPassword1">Senha</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha">
-
-        <br />
-
-        <div class="d-flex justify-content-center">
-            <button type="reset" class="btn btn-secondary">Limpar</button>
-            <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="Autenticar">
-                <button type="submit" class="btn btn-primary mx-2">Entrar</button>
-            </a>
+            <div class="d-flex justify-content-center">
+                <button type="reset" class="btn btn-secondary">Limpar</button>
+                <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="Autenticar">
+                    <button type="submit" class="btn btn-primary mx-2">Entrar</button>
+                </a>
+            </div>
         </div>
-    </div>
-</form>
-
-<script>
-    function mudarLogin(radioButton) {
-        var form = document.getElementById("formLogin");
-
-        if (radioButton.value === "cliente")
-            form.action = "/Login/Autenticar";
-        else if (radioButton.value === "barbeiro")
-            form.action = "/Login/Autenticar";
-    }
-</script>
+    </form>
+}
