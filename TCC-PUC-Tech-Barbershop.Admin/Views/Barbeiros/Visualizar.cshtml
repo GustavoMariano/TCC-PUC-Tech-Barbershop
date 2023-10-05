@@ -8,7 +8,10 @@
                     <div class="card">
                         @if (usuario.Imagem != null && usuario.Imagem.Length > 0)
                         {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(usuario.Imagem)" alt="Card image cap" id="imagemUsuario" style="max-width: 610px; max-height: 610px;">
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(usuario.Imagem)" 
+                            alt="Card image cap" 
+                            id="imagemUsuario" 
+                            style="max-width: 301px; max-height: 301px; min-width: 301px; min-height:301px; width: 100%; height: auto;">
                         }
                         else
                         {
