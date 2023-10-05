@@ -4,13 +4,6 @@ namespace TCC_PUC_Tech_Barbershop.Admin.Models;
 
 public class Barbeiro : Usuario
 {
-    public Agenda? Agenda { get; set; }
-    public FormasPagamento? FormasAceitas { get; set; }
-    [NotMapped]
-    public List<Comentario> Comentarios { get; set; }
-    [NotMapped]
-    public List<Barbeiro> _barbeiros = new List<Barbeiro>();
-
     public Barbeiro()
     {
     }

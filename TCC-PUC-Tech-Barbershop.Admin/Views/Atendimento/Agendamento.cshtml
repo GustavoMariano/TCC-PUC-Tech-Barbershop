@@ -5,41 +5,48 @@
 }
 
 <form id="formCriarAgendamento" method="post" action="CadastrarAtendimento">
+
     <h2>Agendar Atendimento</h2>
+
     <div class="row">
-        <div class="col-6">
+        <div class="col-9">
             <label for="exampleInputName">Barbeiro</label>
         </div>
         <div class="col-3">
-            <label for="exampleInputName">Data</label>
-        </div>
-        <div class="col-3">
-            <label for="exampleInputName">Horário</label>
+            <label for="exampleInputName">Data e Hora</label>
         </div>
     </div>
+
     <div class="row">
-        <div class="col-6">
+        <div class="col-9">
             <div class="btn-group w-100">
-                <select class="btn btn-primary dropdown-toggle" name="Barbeiro.Id" id="Barbeiro">
+                <select class="btn btn-primary dropdown-toggle" name="BarbeiroId" id="Barbeiro">
                     @foreach (var barbeiro in Model.Usuarios)
                     {
-                        <option value="@barbeiro.Id">@barbeiro.Informacoes.Nome @barbeiro.Informacoes.Sobrenome</option>
+                        <option value="@barbeiro.Id">@barbeiro.Informacoes.Nome 
+                            @barbeiro.Informacoes.Sobrenome - 
+                            @barbeiro.Contato.Celular - 
+                            @barbeiro.Endereco.Cidade / 
+                            @barbeiro.Endereco.Estado, 
+                            @barbeiro.Endereco.Bairro
+                        </option>
                     }
                 </select>
             </div>
         </div>
+
         <div class="col-3">
-            <input type="date" class="form-control" placeholder="Data" name="Data">
-        </div>
-        <div class="col-3">
-            <input type="time" class="form-control" placeholder="Hora" name="Hora">
+            <input type="datetime-local" class="form-control" placeholder="DataHora" name="DataHora">
         </div>
     </div>
+
     <hr />
+
     <div class="d-flex justify-content-center">
         <button type="reset" class="btn btn-secondary">Limpar</button>
         <a class="link text-dark" asp-area="" asp-controller="Atendimento" asp-action="CadastrarAtendimento">
             <button type="submit" class="btn btn-primary mx-2">Agendar</button>
         </a>
     </div>
+
 </form>

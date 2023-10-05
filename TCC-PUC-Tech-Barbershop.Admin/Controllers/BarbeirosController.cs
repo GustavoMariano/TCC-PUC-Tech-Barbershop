@@ -42,4 +42,23 @@ public class BarbeirosController : Controller
 
         return PartialView("_DetalhesPerfil", barbeiro);
     }
+
+    [HttpPost]
+    public IActionResult FiltrarBarbeiros(string barbeiroName)
+    {
+        List<Usuario> barbeiros = _dbContext.Usuarios
+        .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+        .Where(u => u.Informacoes.Nome.Contains(barbeiroName))
+        .Include(u => u.Informacoes)
+        .Include(u => u.Endereco)
+        .Include(u => u.Contato)
+        .ToList();
+
+        Usuario usuario = new();
+
+        if (barbeiros.Count() > 0)
+            usuario.Usuarios = barbeiros;
+
+        return View("Visualizar", usuario);
+    }
 }

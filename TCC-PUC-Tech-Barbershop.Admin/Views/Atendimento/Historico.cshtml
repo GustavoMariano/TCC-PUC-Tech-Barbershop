@@ -9,6 +9,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<h2>Atendimentos</h2>
+<br />
+
 @foreach (var atendimento in Model.Atendimentos)
 {
     <div class="row">
@@ -17,7 +20,7 @@
                 @atendimento.Barbeiro.Informacoes.Nome
                 @atendimento.Barbeiro.Informacoes.Sobrenome
                 @atendimento.Barbeiro.Contato.Celular
-                | @atendimento.Data - @atendimento.Hora
+                | @atendimento.DataHora.ToString("dd/MM/yyyy HH:mm tt")
             </p>
         </div>
 
