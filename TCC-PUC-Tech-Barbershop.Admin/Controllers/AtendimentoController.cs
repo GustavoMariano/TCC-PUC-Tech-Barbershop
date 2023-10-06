@@ -14,7 +14,7 @@ public class AtendimentoController : Controller
         _dbContext = dbContext;
     }
 
-    public IActionResult Agendamento()
+    public IActionResult Agendar()
     {
         List<Usuario> barbeiros = _dbContext.Usuarios
         .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
@@ -31,7 +31,7 @@ public class AtendimentoController : Controller
         return View(usuario);
     }
 
-    public IActionResult Historico()
+    public IActionResult Atendimentos()
     {
         Usuario atendimento = new(0, "AA", "AA", null, null, null, TipoUsuarioEnum.Cliente);
         atendimento.AdicionarAtendimentos();
