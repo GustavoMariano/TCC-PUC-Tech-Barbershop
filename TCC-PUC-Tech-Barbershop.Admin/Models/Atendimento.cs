@@ -16,8 +16,9 @@ public class Atendimento
     {
     }
 
-    public Atendimento(DateTime datahora, int clienteId, int barbeiroId, Usuario cliente, Usuario barbeiro)
+    public Atendimento(int id, DateTime datahora, int clienteId, int barbeiroId, Usuario cliente, Usuario barbeiro)
     {
+        Id = id;
         DataHora = datahora;
         ClienteId = clienteId;
         BarbeiroId = barbeiroId;

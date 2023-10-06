@@ -1,5 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Visualizar Atendimento";
+    var nomeBarbeiro = ViewData["NomeBarbeiro"];
+    var sobrenomeBarbeiro = ViewData["SobrenomeBarbeiro"];
+    var celularBarbeiro = ViewData["CelularBarbeiro"];
+    var dataHoraAtendimento = ViewData["DataHoraAtendimento"];
+    var nomeCliente = ViewData["NomeCliente"];
+    var sobrenomeCliente = ViewData["SobrenomeCliente"];
+    var celularCliente = ViewData["CelularCliente"];
 }
 
 <div class="modal fade" tabindex="-1" role="dialog" id="visualizarAtendimentoModal">
@@ -12,7 +19,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>DETALHES.</p>
+                <p>Nome do Barbeiro: @nomeBarbeiro @sobrenomeBarbeiro</p>
+                <p>Celular do Barbeiro: @celularBarbeiro</p>
+                <p>Data e Hora do Atendimento: @dataHoraAtendimento</p>
+                <p>Nome do Cliente: @nomeCliente @sobrenomeCliente</p>
+                <p>Celular do Cliente: @celularCliente</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>

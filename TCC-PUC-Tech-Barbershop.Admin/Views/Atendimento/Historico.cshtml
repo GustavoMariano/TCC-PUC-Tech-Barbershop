@@ -25,7 +25,14 @@
         </div>
 
         <div class="col-md-2">
-            <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#visualizarAtendimentoModal">
+            <button type="button" class="btn btn-info btn-block visualizar-atendimento" data-toggle="modal" data-target="#visualizarAtendimentoModal"
+                    data-nomeB="@atendimento.Barbeiro.Informacoes.Nome"
+                    data-sobrenomeB="@atendimento.Barbeiro.Informacoes.Sobrenome"
+                    data-celularB="@atendimento.Barbeiro.Contato.Celular"
+                    data-datahoraA="@atendimento.DataHora.ToString("dd/MM/yyyy HH:mm tt")"
+                    data-nomeC="@atendimento.Cliente.Informacoes.Nome"
+                    data-sobrenomeC="@atendimento.Cliente.Informacoes.Sobrenome"
+                    data-celularC="@atendimento.Cliente.Contato.Celular">
                 Visualizar
             </button>
         </div>
@@ -54,3 +61,34 @@
 <div id="cancelarAgendamentoContainer">
     @Html.Partial("CancelarAtendimento")
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".visualizar-atendimento").click(function () {
+            var nomeBarbeiro = $(this).data("nomeb");
+            var sobrenomeBarbeiro = $(this).data("sobrenomeb");
+            var celularBarbeiro = $(this).data("celularb");
+            var dataHoraAtendimento = $(this).data("datahoraa");
+            var nomeCliente = $(this).data("nomec");
+            var sobrenomeCliente = $(this).data("sobrenomec");
+            var celularCliente = $(this).data("celularc");
+
+            $("#visualizarAtendimentoModal .modal-body").html(
+                "<p>Nome do Barbeiro: " + nomeBarbeiro + " " + sobrenomeBarbeiro + "</p>" +
+                "<p>Celular do Barbeiro: " + celularBarbeiro + "</p>" +
+                "<p>Data e Hora do Atendimento: " + dataHoraAtendimento + "</p>" +
+                "<p>Nome do Cliente: " + nomeCliente + " " + sobrenomeCliente + "</p>" +
+                "<p>Celular do Cliente: " + celularCliente + "</p>"
+            );
+
+            // Defina os valores no ViewData para que possam ser acessados na view DetalhesAtendimento.cshtml
+            ViewData["NomeBarbeiro"] = nomeBarbeiro;
+            ViewData["SobrenomeBarbeiro"] = sobrenomeBarbeiro;
+            ViewData["CelularBarbeiro"] = celularBarbeiro;
+            ViewData["DataHoraAtendimento"] = dataHoraAtendimento;
+            ViewData["NomeCliente"] = nomeCliente;
+            ViewData["SobrenomeCliente"] = sobrenomeCliente;
+            ViewData["CelularCliente"] = celularCliente;
+        });
+    });
+</script>
