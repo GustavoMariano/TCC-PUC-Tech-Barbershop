@@ -43,21 +43,36 @@ public class BarbeirosController : Controller
         return PartialView("_DetalhesPerfil", barbeiro);
     }
 
-    [HttpPost]
     public IActionResult FiltrarBarbeiros(string barbeiroName)
     {
-        List<Usuario> barbeiros = _dbContext.Usuarios
-        .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
-        .Where(u => u.Informacoes.Nome.Contains(barbeiroName))
+        Usuario usuario = new();
+
+        List<Usuario> barbeirosFiltrados = _dbContext.Usuarios
+        .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro &&
+        (u.Informacoes.Nome.Contains(barbeiroName) || u.Informacoes.Sobrenome.Contains(barbeiroName)))
         .Include(u => u.Informacoes)
         .Include(u => u.Endereco)
         .Include(u => u.Contato)
         .ToList();
 
-        Usuario usuario = new();
+        if (barbeirosFiltrados.Count > 0)
+        {
+            usuario.Usuarios = barbeirosFiltrados;
+            return View("Visualizar", usuario);
+        }
 
-        if (barbeiros.Count() > 0)
-            usuario.Usuarios = barbeiros;
+        List<Usuario> todosBarbeiros = _dbContext.Usuarios
+                .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+                .Include(u => u.Informacoes)
+                .Include(u => u.Endereco)
+                .Include(u => u.Contato)
+                .ToList();
+
+        if (barbeirosFiltrados.Count == 0 && todosBarbeiros.Count > 0)
+        {
+            usuario.Usuarios = todosBarbeiros;
+            return View("Visualizar", usuario);
+        }
 
         return View("Visualizar", usuario);
     }

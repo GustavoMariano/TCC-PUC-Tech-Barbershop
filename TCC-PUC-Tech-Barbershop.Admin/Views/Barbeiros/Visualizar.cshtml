@@ -4,11 +4,14 @@
 
 <form method="post" action="FiltrarBarbeiros">
     <div class="row">
-        <div class="col-11">
-            <input type="text" class="form-control" id="barbeiroName" name="barbeiroName" placeholder="Pesquisar por nome do barbeiro">
-            </div>
+        <div class="col-10">
+            <input type="text" class="form-control" id="barbeiroName" name="barbeiroName" placeholder="Pesquisar por nome ou sobrenome do barbeiro">
+        </div>
         <div class="col-1">
             <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary" id="resetButton">Resetar</button>
         </div>
     </div>
 </form>
@@ -69,6 +72,14 @@
                     $(this).show();
                 }
             });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#resetButton").click(function () {
+            window.location.href = window.location.origin + window.location.pathname;
         });
     });
 </script>
