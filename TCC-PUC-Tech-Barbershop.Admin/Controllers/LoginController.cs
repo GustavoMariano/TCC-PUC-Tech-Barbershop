@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
@@ -28,7 +31,26 @@ public class LoginController : Controller
         var user = _dbContext.Usuarios.FirstOrDefault(u => u.Login == usuario.Login && u.Senha == usuario.Senha);
 
         if (user != null)
+        {
+            bool result = HttpContext.User.Identity.IsAuthenticated;
+            List<Claim> claims = new() {
+                new Claim(ClaimTypes.Name, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Login),
+                };
+            var identity = new ClaimsIdentity(claims.ToArray(), CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTime.Now.AddHours(1),
+                IssuedUtc = DateTime.Now
+            };            
+
+            var principal = new ClaimsPrincipal(identity);
+            HttpContext.User = principal;
+            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, authProperties);
+
             return RedirectToAction("Index", "Home");
+        }
         else
         {
             ModelState.AddModelError(string.Empty, "Credenciais inválidas. Verifique seu login e senha.");
