@@ -14,21 +14,46 @@ public class AtendimentoController : Controller
         _dbContext = dbContext;
     }
 
-    public IActionResult Agendar()
+    public IActionResult Agendar(int? barbeiroId = null)
     {
-        List<Usuario> barbeiros = _dbContext.Usuarios
-        .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
-        .Include(u => u.Informacoes)
-        .Include(u => u.Endereco)
-        .Include(u => u.Contato)
-        .ToList();
+        if (barbeiroId == null)
+        {
+            List<Usuario> barbeiros = _dbContext.Usuarios
+            .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .ToList();
 
-        Usuario usuario = new();
+            Usuario usuario = new();
 
-        if (barbeiros.Count() > 0)
-            usuario.Usuarios = barbeiros;
+            if (barbeiros.Count() > 0)
+                usuario.Usuarios = barbeiros;
 
-        return View(usuario);
+            return View(usuario);
+        }
+        else
+        {
+            var barbeiro = _dbContext.Usuarios
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .FirstOrDefault(u => u.Id == barbeiroId);
+
+            if (barbeiro == null || barbeiro.TipoUsuario != TipoUsuarioEnum.Barbeiro)
+                return NotFound();
+
+            // Passe os dados do barbeiro para a página de agendamento
+            ViewBag.BarbeiroId = barbeiro.Id;
+            ViewBag.BarbeiroInfos = $"{barbeiro.Informacoes.Nome} " +
+                $"{barbeiro.Informacoes.Sobrenome} - " +
+                $"{barbeiro.Contato.Celular} - " +
+                $"{barbeiro.Endereco.Cidade} / " +
+                $"{barbeiro.Endereco.Estado}, " +
+                $"{barbeiro.Endereco.Bairro}";
+
+            return View();
+        }
     }
 
     public IActionResult Atendimentos()
@@ -42,8 +67,10 @@ public class AtendimentoController : Controller
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
-        // Verifique aqui se o model está corretamente preenchido com os dados do formulário.
-        var a = model.Barbeiro.Id;
+        if(model.BarbeiroId != 0)
+        {
+            //Implementação
+        }
         // Retorna os dados
         return RedirectToAction("Index", "Home");
     }

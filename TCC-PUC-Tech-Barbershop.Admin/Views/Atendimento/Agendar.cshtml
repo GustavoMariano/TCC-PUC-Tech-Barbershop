@@ -4,10 +4,9 @@
     ViewData["Title"] = "Agendamento";
 }
 
+<h2>Agendar Atendimento</h2>
+
 <form id="formCriarAgendamento" method="post" action="CadastrarAtendimento">
-
-    <h2>Agendar Atendimento</h2>
-
     <div class="row">
         <div class="col-9">
             <label for="exampleInputName">Barbeiro</label>
@@ -21,15 +20,23 @@
         <div class="col-9">
             <div class="btn-group w-100">
                 <select class="btn btn-primary dropdown-toggle" name="BarbeiroId" id="Barbeiro">
-                    @foreach (var barbeiro in Model.Usuarios)
+                    @if (Model == null)
                     {
-                        <option value="@barbeiro.Id">@barbeiro.Informacoes.Nome 
-                            @barbeiro.Informacoes.Sobrenome - 
-                            @barbeiro.Contato.Celular - 
-                            @barbeiro.Endereco.Cidade / 
-                            @barbeiro.Endereco.Estado, 
-                            @barbeiro.Endereco.Bairro
-                        </option>
+                        <option value="@ViewBag.BarbeiroId">@ViewBag.BarbeiroInfos</option>
+                    }
+                    else
+                    {
+                        @foreach (var barbeiro in Model.Usuarios)
+                        {
+                            <option value="@barbeiro.Id">
+                                @barbeiro.Informacoes.Nome
+                                @barbeiro.Informacoes.Sobrenome -
+                                @barbeiro.Contato.Celular -
+                                @barbeiro.Endereco.Cidade /
+                                @barbeiro.Endereco.Estado,
+                                @barbeiro.Endereco.Bairro
+                            </option>
+                        }
                     }
                 </select>
             </div>
@@ -44,9 +51,7 @@
 
     <div class="d-flex justify-content-center">
         <button type="reset" class="btn btn-secondary">Limpar</button>
-        <a class="link text-dark" asp-area="" asp-controller="Atendimento" asp-action="CadastrarAtendimento">
-            <button type="submit" class="btn btn-primary mx-2">Agendar</button>
-        </a>
+        <button type="submit" class="btn btn-primary mx-2">Agendar</button>
     </div>
 
 </form>
