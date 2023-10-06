@@ -10,7 +10,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <h2>Atendimentos</h2>
-<br />
 
 <form method="post" action="FiltrarAtendimentos">
     <div class="form-row justify-content-end">
@@ -114,30 +113,27 @@
         $("#filtroAtendimentos").on("change", function () {
             var filtroSelecionado = $(this).val();
 
-            // Se o usuário selecionou "Todos", mostrar todos os atendimentos
             if (filtroSelecionado === "todos") {
-                $(".row").show(); // Mostrar todas as linhas de atendimento
+                $(".row").show();
             } else {
-                // Ocultar todas as linhas de atendimento
                 $(".row").hide();
 
-                // Mostrar atendimentos com base no filtro selecionado
                 if (filtroSelecionado === "anteriores") {
-                    var dataHoraAtual = new Date(); // Obtém a data e hora atual
+                    var dataHoraAtual = new Date();
                     $(".row").each(function () {
-                        var dataHoraAtendimento = new Date($(this).find(".visualizar-atendimento").data("datahoraa")); // Obtém a data e hora do atendimento do atributo data-datahoraa do botão
+                        var dataHoraAtendimento = new Date($(this).find(".visualizar-atendimento").data("datahoraa"));
 
                         if (dataHoraAtendimento < dataHoraAtual) {
-                            $(this).show(); // Mostrar o atendimento se for anterior à data e hora atual
+                            $(this).show();
                         }
                     });
                 } else if (filtroSelecionado === "proximos") {
-                    var dataHoraAtual = new Date(); // Obtém a data e hora atual
+                    var dataHoraAtual = new Date();
                     $(".row").each(function () {
-                        var dataHoraAtendimento = new Date($(this).find(".visualizar-atendimento").data("datahoraa")); // Obtém a data e hora do atendimento do atributo data-datahoraa do botão
+                        var dataHoraAtendimento = new Date($(this).find(".visualizar-atendimento").data("datahoraa"));
 
                         if (dataHoraAtendimento >= dataHoraAtual) {
-                            $(this).show(); // Mostrar o atendimento se for igual ou posterior à data e hora atual
+                            $(this).show();
                         }
                     });
                 }
