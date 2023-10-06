@@ -14,7 +14,7 @@ public class BarbeirosController : Controller
         _dbContext = dbContext;
     }
 
-    public IActionResult Visualizar()
+    public IActionResult VisualizarBarbeiros()
     {
         List<Usuario> barbeiros = _dbContext.Usuarios
         .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
@@ -58,7 +58,7 @@ public class BarbeirosController : Controller
         if (barbeirosFiltrados.Count > 0)
         {
             usuario.Usuarios = barbeirosFiltrados;
-            return View("Visualizar", usuario);
+            return View("VisualizarBarbeiros", usuario);
         }
 
         List<Usuario> todosBarbeiros = _dbContext.Usuarios
@@ -71,9 +71,9 @@ public class BarbeirosController : Controller
         if (barbeirosFiltrados.Count == 0 && todosBarbeiros.Count > 0)
         {
             usuario.Usuarios = todosBarbeiros;
-            return View("Visualizar", usuario);
+            return View("VisualizarBarbeiros", usuario);
         }
 
-        return View("Visualizar", usuario);
+        return View("VisualizarBarbeiros", usuario);
     }
 }
