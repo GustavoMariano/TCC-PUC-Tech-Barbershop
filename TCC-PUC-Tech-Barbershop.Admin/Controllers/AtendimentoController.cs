@@ -47,4 +47,26 @@ public class AtendimentoController : Controller
         // Retorna os dados
         return RedirectToAction("Index", "Home");
     }
+
+    [HttpPost]
+    public async Task<ActionResult<dynamic>> CancelarAtendimento(int atendimentoId)
+    {
+        try
+        {
+            var atendimento = await _dbContext.Atendimentos.FindAsync(atendimentoId);
+
+            if (atendimento != null)
+            {
+                _dbContext.Atendimentos.Remove(atendimento);
+                await _dbContext.SaveChangesAsync();
+                return Ok();
+            }
+
+            return NotFound();
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 }

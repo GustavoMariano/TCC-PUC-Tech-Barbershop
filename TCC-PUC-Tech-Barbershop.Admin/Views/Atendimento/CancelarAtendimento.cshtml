@@ -12,12 +12,35 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>CANCELAR.</p>
+                <p>Deseja mesmo cancelar o atendimento?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Confirmar</button>
+                <button type="button" class="btn btn-warning" id="confirmarCancelamento">Confirmar Cancelamento</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        var atendimentoId;
+
+        $(".btn-danger").click(function () {
+            atendimentoId = $(this).data("atendimento-id");
+        });
+
+        $("#confirmarCancelamento").click(function () {
+            $.ajax({
+                url: "/Atendimento/CancelarAtendimento",
+                method: "POST",
+                data: { atendimentoId: atendimentoId },
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                }
+            });
+        });
+    });
+</script>
