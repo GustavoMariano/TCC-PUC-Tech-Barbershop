@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,14 +36,29 @@
                             </li>
                         }
                     </ul>
-                </div>
 
-                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Cadastrar">
-                    <button class="btn btn-secondary">Cadastrar</button>
-                </a>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Entrar">
-                    <button class="btn btn-primary">Entrar</button>
-                </a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="perfilDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="perfilDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="View">Ver Perfil</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Cadastrar">
+                            <button class="btn btn-secondary">Cadastrar</button>
+                        </a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Entrar">
+                            <button class="btn btn-primary">Entrar</button>
+                        </a>
+                    }
+                </div>
 
             </div>
         </nav>

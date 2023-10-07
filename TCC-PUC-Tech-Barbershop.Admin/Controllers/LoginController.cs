@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
@@ -28,14 +29,15 @@ public class LoginController : Controller
     [HttpPost]
     public IActionResult LoginUsuario(Usuario usuario)
     {
-        var user = _dbContext.Usuarios.FirstOrDefault(u => u.Login == usuario.Login && u.Senha == usuario.Senha);
+        var user = _dbContext.Usuarios.Include(u => u.Informacoes).FirstOrDefault(u => u.Login == usuario.Login && u.Senha == usuario.Senha);
 
         if (user != null)
         {
             bool result = HttpContext.User.Identity.IsAuthenticated;
             List<Claim> claims = new() {
-                new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Login),
+                new Claim("Id", user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Informacoes.Nome),
+                new Claim(ClaimTypes.Role, user.TipoUsuario.ToString())
                 };
             var identity = new ClaimsIdentity(claims.ToArray(), CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -115,5 +117,12 @@ public class LoginController : Controller
         _dbContext.SaveChanges();
 
         return RedirectToAction("Entrar", "Login");
+    }
+
+    public IActionResult Sair()
+    {
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return RedirectToAction("Index", "Home");
     }
 }

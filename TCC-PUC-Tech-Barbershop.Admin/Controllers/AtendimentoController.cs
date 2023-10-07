@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
@@ -67,9 +68,16 @@ public class AtendimentoController : Controller
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
-        if(model.BarbeiroId != 0)
+        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var id);
+        
+        if (id == 0) { }
+        if (model.BarbeiroId != 0)
         {
-            //Implementação
+            //Insere requisição do Cliente
+        }
+        else if (model.ClienteId != 0)
+        {
+            //Insere requisição do Barbeiro
         }
         // Retorna os dados
         return RedirectToAction("Index", "Home");
