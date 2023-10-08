@@ -60,7 +60,7 @@
 
     <hr />
 
-    @if (Model.Usuarios != null)
+    @if (Model?.Usuarios != null || @ViewBag.BarbeiroId != null)
     {
         <div class="d-flex justify-content-center">
             <button type="reset" class="btn btn-secondary">Limpar</button>
