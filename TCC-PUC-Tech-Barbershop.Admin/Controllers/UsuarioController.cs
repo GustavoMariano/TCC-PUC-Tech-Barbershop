@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
@@ -44,6 +43,11 @@ public class UsuarioController : Controller
     }
 
     public IActionResult Editar()
+    {
+        return RedirectToAction("Index", "Home");
+    }
+
+    public IActionResult Deletar()
     {
         return RedirectToAction("Index", "Home");
     }
