@@ -44,7 +44,7 @@
                                 @User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
                             </a>
                             <div class="dropdown-menu" aria-labelledby="perfilDropdown">
-                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="View">Ver Perfil</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="VisualizarPerfil">Ver Perfil</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a>
                             </div>
                         </div>

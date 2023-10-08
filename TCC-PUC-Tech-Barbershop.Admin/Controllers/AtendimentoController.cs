@@ -17,7 +17,7 @@ public class AtendimentoController : Controller
 
     public IActionResult Agendar(int? barbeiroId = null)
     {
-        if (barbeiroId == null && User.HasClaim(ClaimTypes.Role, "Cliente")) //Origem Agendar e Cliente
+        if (barbeiroId == null && User.HasClaim(ClaimTypes.Role, "Cliente"))
         {
             List<Usuario> barbeiros = _dbContext.Usuarios
             .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)

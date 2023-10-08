@@ -1,0 +1,103 @@
+﻿@using System.Security.Claims;
+@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+
+@{
+    ViewData["Title"] = "Visualizar Perfil";
+}
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Imagem de Perfil</h2>
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Imagem)"
+                 alt="Card image cap"
+                 id="imagemUsuario"
+                 style="max-width: 301px; max-height: 301px; min-width: 301px; min-height:301px; width: 100%; height: auto;">
+        </div>
+        <div class="col-md-9">
+            <h2>Informações Pessoais</h2>
+
+            <h5>
+                <div class="row">
+                    <div class="col-5">
+                        <label for="exampleInputName">Nome: @Model.Informacoes.Nome</label>
+                    </div>
+                    <div class="col-4">
+                        <label for="exampleInputName">Sobrenome: @Model.Informacoes.Sobrenome</label>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputName">Sexo: @Model.Informacoes.Sexo</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col">
+                        <label for="exampleInputEmail">E-mail: @Model.Contato.Email</label>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPhoneCellPhone">Telefone/Celular: @Model.Contato.Celular</label>
+                    </div>
+                </div>
+            </h5>
+            <br />
+            <hr />
+
+            <h2>Endereço</h2>
+
+            <h5>
+                <div class="row">
+                    <div class="col-3">
+                        <label for="exampleInputName">CEP: @Model.Endereco.Cep</label>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputName">Estado: @Model.Endereco.Estado</label>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputName">Cidade @Model.Endereco.Cidade</label>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputName">Bairro @Model.Endereco.Bairro</label>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div class="col-4">
+                        <label for="exampleInputName">Logradouro: @Model.Endereco.Logradouro</label>
+                    </div>
+                    <div class="col-3">
+                        <label for="exampleInputName">Número: @Model.Endereco.Numero</label>
+                    </div>
+                    <div class="col-4">
+                        <label for="exampleInputName">Complemento: @Model.Endereco.Complemento</label>
+                    </div>
+                </div>
+            </h5>
+        </div>
+    </div>
+    <hr />
+    @* @if (User.HasClaim(ClaimTypes.Role, "Barbeiro") && Model.Agenda.DiasDisponiveis != null)
+    {
+    <div class="row">
+    <div class="col-4">
+    <label for="exampleInputName">Dias:</label>
+    @foreach (var item in Model.Agenda.DiasDisponiveis)
+    {
+    <label for="exampleInputName">@item</label>
+    }
+    </div>
+    <div class="col-4">
+    <label for="exampleInputName">Complemento: @Model.Endereco.Complemento</label>
+    </div>
+    </div>
+    } *@
+
+    <div class="d-flex justify-content-center">
+        <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="EditarPerfil">
+            <button type="submit" class="btn btn-primary mx-2">Editar Perfil</button>
+        </a>
+    </div>
+</div>
