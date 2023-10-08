@@ -1,4 +1,5 @@
-﻿<h2>Barbeiros</h2>
+﻿@using System.Security.Claims;
+<h2>Barbeiros</h2>
 
 <hr />
 
@@ -43,11 +44,14 @@
                             <p class="card-text">@usuario.Informacoes.Descricao</p>
                             <p class="card-text"><small class="text-muted">@usuario.Endereco.Bairro</small></p>
                         </div>
-                        <div class="card-footer">
-                            <a class="btn btn-primary btn-block" href="@Url.Action("Agendar", "Atendimento", new { barbeiroId = usuario.Id })">
-                                Agendar
-                            </a>
-                        </div>
+                        @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Cliente"))
+                        {
+                            <div class="card-footer">
+                                <a class="btn btn-primary btn-block" href="@Url.Action("Agendar", "Atendimento", new { barbeiroId = usuario.Id })">
+                                    Agendar
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

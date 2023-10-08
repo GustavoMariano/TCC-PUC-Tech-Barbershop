@@ -1,4 +1,5 @@
-﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+﻿@using System.Security.Claims;
+@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
 
 @{
     ViewData["Title"] = "Agendamento";
@@ -9,7 +10,14 @@
 <form id="formCriarAgendamento" method="post" action="CadastrarAtendimento">
     <div class="row">
         <div class="col-9">
-            <label for="exampleInputName">Barbeiro</label>
+            @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Cliente"))
+            {
+                <label for="exampleInputName">Barbeiro</label>
+            }
+            else
+            {
+                <label for="exampleInputName">Cliente</label>
+            }
         </div>
         <div class="col-3">
             <label for="exampleInputName">Data e Hora</label>
@@ -19,23 +27,26 @@
     <div class="row">
         <div class="col-9">
             <div class="btn-group w-100">
-                <select class="btn btn-primary dropdown-toggle" name="BarbeiroId" id="Barbeiro">
+                <select class="btn btn-primary dropdown-toggle" name="@((User.HasClaim(ClaimTypes.Role, "Barbeiro")) ? "ClienteId" : "BarbeiroId")" id="Barbeiro">
                     @if (Model == null)
                     {
                         <option value="@ViewBag.BarbeiroId">@ViewBag.BarbeiroInfos</option>
                     }
                     else
                     {
-                        @foreach (var barbeiro in Model.Usuarios)
+                        @if (Model.Usuarios != null)
                         {
-                            <option value="@barbeiro.Id">
-                                @barbeiro.Informacoes.Nome
-                                @barbeiro.Informacoes.Sobrenome -
-                                @barbeiro.Contato.Celular -
-                                @barbeiro.Endereco.Cidade /
-                                @barbeiro.Endereco.Estado,
-                                @barbeiro.Endereco.Bairro
-                            </option>
+                            @foreach (var usuario in Model.Usuarios)
+                            {
+                                <option value="@usuario.Id">
+                                    @usuario.Informacoes.Nome
+                                    @usuario.Informacoes.Sobrenome -
+                                    @usuario.Contato.Celular -
+                                    @usuario.Endereco.Cidade /
+                                    @usuario.Endereco.Estado,
+                                    @usuario.Endereco.Bairro
+                                </option>
+                            }
                         }
                     }
                 </select>
@@ -49,9 +60,11 @@
 
     <hr />
 
-    <div class="d-flex justify-content-center">
-        <button type="reset" class="btn btn-secondary">Limpar</button>
-        <button type="submit" class="btn btn-primary mx-2">Agendar</button>
-    </div>
-
+    @if (Model.Usuarios != null)
+    {
+        <div class="d-flex justify-content-center">
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+            <button type="submit" class="btn btn-primary mx-2">Agendar</button>
+        </div>
+    }
 </form>

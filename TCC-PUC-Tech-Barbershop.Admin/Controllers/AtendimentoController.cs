@@ -17,10 +17,26 @@ public class AtendimentoController : Controller
 
     public IActionResult Agendar(int? barbeiroId = null)
     {
-        if (barbeiroId == null)
+        if (barbeiroId == null && User.HasClaim(ClaimTypes.Role, "Cliente")) //Origem Agendar e Cliente
         {
             List<Usuario> barbeiros = _dbContext.Usuarios
             .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .ToList();
+
+            Usuario usuario = new();
+
+            if (barbeiros.Count() > 0)
+                usuario.Usuarios = barbeiros;
+
+            return View(usuario);
+        }
+        else if (User.HasClaim(ClaimTypes.Role, "Barbeiro"))
+        {
+            List<Usuario> barbeiros = _dbContext.Usuarios
+            .Where(u => u.TipoUsuario == TipoUsuarioEnum.Cliente)
             .Include(u => u.Informacoes)
             .Include(u => u.Endereco)
             .Include(u => u.Contato)
@@ -44,7 +60,6 @@ public class AtendimentoController : Controller
             if (barbeiro == null || barbeiro.TipoUsuario != TipoUsuarioEnum.Barbeiro)
                 return NotFound();
 
-            // Passe os dados do barbeiro para a página de agendamento
             ViewBag.BarbeiroId = barbeiro.Id;
             ViewBag.BarbeiroInfos = $"{barbeiro.Informacoes.Nome} " +
                 $"{barbeiro.Informacoes.Sobrenome} - " +
@@ -59,27 +74,71 @@ public class AtendimentoController : Controller
 
     public IActionResult Atendimentos()
     {
-        Usuario atendimento = new(0, "AA", "AA", null, null, null, TipoUsuarioEnum.Cliente);
-        atendimento.AdicionarAtendimentos();
-        return View(atendimento);
+        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+
+        if (User.HasClaim(ClaimTypes.Role, "Cliente"))
+        {
+            List<Atendimento> atendimentos = _dbContext.Atendimentos
+            .Where(a => a.ClienteId == cookieId)
+
+            .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+            .Include(u => u.Cliente)
+                .ThenInclude(c => c.Endereco)
+            .Include(u => u.Cliente)
+                .ThenInclude(c => c.Contato)
+
+            .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Informacoes)
+            .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Endereco)
+            .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Contato)
+            .ToList();
+
+            Usuario result = new();
+
+            if (atendimentos.Count() > 0)
+                result.Atendimentos = atendimentos;
+
+            return View(result);
+        }
+        else
+        {
+            List<Atendimento> atendimentos = _dbContext.Atendimentos
+            .Where(a => a.BarbeiroId == cookieId)
+            .Include(u => u.Cliente)
+            .Include(u => u.Barbeiro)
+            .ToList();
+
+            Usuario result = new();
+
+            if (atendimentos.Count() > 0)
+                result.Atendimentos = atendimentos;
+
+            return View(result);
+        }
     }
 
 
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
-        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var id);
-        
-        if (id == 0) { }
+        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+
         if (model.BarbeiroId != 0)
         {
-            //Insere requisição do Cliente
+            model.ClienteId = cookieId;
         }
         else if (model.ClienteId != 0)
         {
-            //Insere requisição do Barbeiro
+            model.BarbeiroId = cookieId;
         }
-        // Retorna os dados
+
+        _dbContext.Atendimentos.Add(model);
+
+        await _dbContext.SaveChangesAsync();
+
         return RedirectToAction("Index", "Home");
     }
 

@@ -11,7 +11,7 @@ public class Atendimento
     public Usuario Cliente { get; set; }
     public Usuario Barbeiro { get; set; }
     public DateTime DataHora { get; set; }
-
+    public List<Atendimento> Atendimentos { get; set; }
     public Atendimento()
     {
     }
