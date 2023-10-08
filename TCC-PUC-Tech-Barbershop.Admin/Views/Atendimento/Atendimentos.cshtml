@@ -1,4 +1,5 @@
-﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+﻿@using System.Security.Claims;
+@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
 
 @{
     ViewData["Title"] = "Atendimentos";
@@ -40,12 +41,24 @@ else
     {
         <div class="row">
             <div class="col-md-6">
-                <p>
-                    @atendimento.Barbeiro.Informacoes.Nome
-                    @atendimento.Barbeiro.Informacoes.Sobrenome
-                    @atendimento.Barbeiro.Contato.Celular
-                    | @atendimento.DataHora.ToString("dd/MM/yyyy HH:mm tt")
-                </p>
+                @if (User.HasClaim(ClaimTypes.Role, "Barbeiro"))
+                {
+                    <p>
+                        @atendimento.Cliente.Informacoes.Nome
+                        @atendimento.Cliente.Informacoes.Sobrenome
+                        @atendimento.Cliente.Contato.Celular
+                        | @atendimento.DataHora.ToString("dd/MM/yyyy HH:mm tt")
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        @atendimento.Barbeiro.Informacoes.Nome
+                        @atendimento.Barbeiro.Informacoes.Sobrenome
+                        @atendimento.Barbeiro.Contato.Celular
+                        | @atendimento.DataHora.ToString("dd/MM/yyyy HH:mm tt")
+                    </p>
+                }
             </div>
 
             <div class="col-md-2">

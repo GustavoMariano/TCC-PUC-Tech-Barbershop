@@ -80,7 +80,6 @@ public class AtendimentoController : Controller
         {
             List<Atendimento> atendimentos = _dbContext.Atendimentos
             .Where(a => a.ClienteId == cookieId)
-
             .Include(u => u.Cliente)
                 .ThenInclude(c => c.Informacoes)
             .Include(u => u.Cliente)
@@ -108,7 +107,18 @@ public class AtendimentoController : Controller
             List<Atendimento> atendimentos = _dbContext.Atendimentos
             .Where(a => a.BarbeiroId == cookieId)
             .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+            .Include(u => u.Cliente)
+                .ThenInclude(c => c.Endereco)
+            .Include(u => u.Cliente)
+                .ThenInclude(c => c.Contato)
+
             .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Informacoes)
+            .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Endereco)
+            .Include(u => u.Barbeiro)
+                .ThenInclude(b => b.Contato)
             .ToList();
 
             Usuario result = new();
