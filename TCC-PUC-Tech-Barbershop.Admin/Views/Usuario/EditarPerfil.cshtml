@@ -1,10 +1,11 @@
-﻿@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+﻿@using System.Security.Claims;
+@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
 
 @{
     ViewData["Title"] = "Editar Perfil";
 }
 
-<form id="formCadastrar" method="post" action="/Usuario/EditarUsuario" enctype="multipart/form-data">
+<form id="formCadastrar" method="post" action="/Usuario/Editar" enctype="multipart/form-data">
     <div class="form-group">
         <div class="row">
             <div class="col-md-3">
@@ -147,15 +148,24 @@
                         <label for="exampleInputName">Complemento</label>
                         <input type="text" class="form-control" placeholder="Complemento" name="Endereco.Complemento" value="@Model.Endereco.Complemento">
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
         <hr />
 
+        @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Barbeiro"))
+        {
+            <div class="col-5">
+                <label for="exampleInputName">Formas de pagamento</label>
+                <input type="text" class="form-control" placeholder="Ex. Dinheiro, Cartão, Pix" name="FormasPagamentos" value="@Model.FormasPagamentos">
+            </div>
+        }
+        <hr />
+
         <div class="d-flex justify-content-center">
             <button type="reset" class="btn btn-secondary">Limpar</button>
-            <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="#">
-                <button type="submit" class="btn btn-primary mx-2">Editar</button>
+            <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="Editar">
+                <button type="submit" class="btn btn-primary mx-2">Salvar alterações</button>
             </a>
         </div>
     </div>

@@ -46,9 +46,50 @@ public class UsuarioController : Controller
         return View(usuario);
     }
 
-    public IActionResult Editar()
+    public async Task<IActionResult> Editar(Usuario usuario, IFormFile Imagem)
     {
-        return RedirectToAction("Index", "Home");
+        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+
+        try
+        {
+            var usuarioExistente = await _dbContext.Usuarios.FindAsync(cookieId);
+
+            if (usuarioExistente != null)
+            {
+                usuarioExistente.Contato = usuario.Contato;
+                usuarioExistente.Informacoes = usuario.Informacoes;
+                usuarioExistente.Endereco = usuario.Endereco;
+
+                if (!string.IsNullOrEmpty(usuario.Senha))
+                    usuarioExistente.Senha = usuario.Senha;
+
+                if (!string.IsNullOrEmpty(usuario.FormasPagamentos))
+                    usuarioExistente.FormasPagamentos = usuario.FormasPagamentos;
+
+                if (Imagem != null)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        Imagem.CopyTo(ms);
+                        usuarioExistente.Imagem = ms.ToArray();
+                    }
+                }
+
+                _dbContext.Update(usuarioExistente);
+                await _dbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (DbUpdateException ex)
+        {
+            ModelState.AddModelError("", "Erro ao atualizar o usuário.");
+            return View(usuario);
+        }
     }
 
     public IActionResult Deletar()

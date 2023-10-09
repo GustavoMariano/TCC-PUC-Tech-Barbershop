@@ -11,7 +11,6 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Barbeiro> Barbeiros { get; set; }
-    public DbSet<Agenda> Agendas { get; set; }
     public DbSet<Atendimento> Atendimentos { get; set; }
     public DbSet<Comentario> Comentarios { get; set; }
     public DbSet<Contato> Contatos { get; set; }

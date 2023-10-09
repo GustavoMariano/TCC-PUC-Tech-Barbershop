@@ -79,28 +79,38 @@
         </div>
     </div>
     <hr />
-    @* @if (User.HasClaim(ClaimTypes.Role, "Barbeiro") && Model.Agenda.DiasDisponiveis != null)
-    {
-    <div class="row">
-    <div class="col-4">
-    <label for="exampleInputName">Dias:</label>
-    @foreach (var item in Model.Agenda.DiasDisponiveis)
-    {
-    <label for="exampleInputName">@item</label>
-    }
-    </div>
-    <div class="col-4">
-    <label for="exampleInputName">Complemento: @Model.Endereco.Complemento</label>
-    </div>
-    </div>
-    } *@
 
-    <div class="d-flex justify-content-center">
-        <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="EditarPerfil">
-            <button type="submit" class="btn btn-primary mx-2">Editar Perfil</button>
-        </a>
-        <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="Deletar">
-            <button type="submit" class="btn btn-primary mx-2">Deletar Perfil</button>
-        </a>
-    </div>
+    @if (Model.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+    {
+        if (!string.IsNullOrEmpty(Model.FormasPagamentos))
+        {
+            <h2>Formas aceitas</h2>
+            <h5>
+                @Model.FormasPagamentos
+            </h5>
+        }
+
+        if (Model.Comentarios != null)
+        {
+            <h2>Cometários</h2>
+            @foreach (var item in Model.Comentarios)
+            {
+                <h5>
+                    item.Texto;
+                </h5>
+            }
+        }
+    }
+
+    @if (Model.Id == int.Parse(User.FindFirstValue("Id")))
+    {
+        <div class="d-flex justify-content-center">
+            <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="EditarPerfil">
+                <button type="submit" class="btn btn-primary mx-2">Editar Perfil</button>
+            </a>
+            <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="Deletar">
+                <button type="submit" class="btn btn-primary mx-2">Deletar Perfil</button>
+            </a>
+        </div>
+    }
 </div>
