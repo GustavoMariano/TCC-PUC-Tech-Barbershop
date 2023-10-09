@@ -46,14 +46,17 @@
                             <p class="card-text">@usuario.Informacoes.Descricao</p>
                             <p class="card-text"><small class="text-muted">@usuario.Endereco.Bairro</small></p>
                         </div>
-                        @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Cliente"))
-                        {
-                            <div class="card-footer">
-                                <a class="btn btn-primary btn-block" href="@Url.Action("Agendar", "Atendimento", new { barbeiroId = usuario.Id })">
+                        <div class="card-footer d-flex justify-content-center">
+                            @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Cliente"))
+                            {
+                                <a class="btn btn-primary mx-2" href="@Url.Action("Agendar", "Atendimento", new { barbeiroId = usuario.Id })">
                                     Agendar
                                 </a>
-                            </div>
-                        }
+                            }
+                            <a class="btn btn-secondary mx-2 visualizar-perfil-button" href="@Url.Action("VisualizarPerfil", "Usuario", new { id = usuario.Id })">
+                                Visualizar Perfil
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

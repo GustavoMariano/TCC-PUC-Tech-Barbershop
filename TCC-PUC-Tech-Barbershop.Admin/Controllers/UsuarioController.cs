@@ -14,12 +14,16 @@ public class UsuarioController : Controller
         _dbContext = dbContext;
     }
 
-    public IActionResult VisualizarPerfil()
+    public IActionResult VisualizarPerfil(int? id = null)
     {
-        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+        if (id == null)
+        {
+            int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+            id = cookieId;
+        }
 
         Usuario usuario = _dbContext.Usuarios
-        .Where(u => u.Id == cookieId)
+        .Where(u => u.Id == id)
         .Include(u => u.Informacoes)
         .Include(u => u.Endereco)
         .Include(u => u.Contato)
