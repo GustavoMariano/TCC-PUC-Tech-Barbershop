@@ -1,19 +1,39 @@
-﻿<div class="modal fade" id="confirmacaoModal" tabindex="-1" role="dialog" aria-labelledby="confirmacaoModalLabel" aria-hidden="true">
+﻿@{
+    ViewData["Title"] = "Deletar Perfil";
+}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deletarPerfilModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="confirmacaoModalLabel">Confirmar Ação</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <h5 class="modal-title">Deletar Perfil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Tem certeza de que deseja deletar seu perfil? Esta ação não pode ser desfeita.
+                <p>Deseja mesmo deletar o seu perfil?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a id="btnConfirmarDeletarPerfil" class="btn btn-danger" href="#">Deletar Perfil</a>
+                <button type="button" class="btn btn-warning" id="confirmarDeletamento">Deletar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("#confirmarDeletamento").click(function () {
+            $.ajax({
+                url: "/Usuario/Deletar",
+                method: "POST",
+                success: function () {
+                    location.reload();
+                },
+                error: function () {
+                }
+            });
+        });
+    });
+</script>

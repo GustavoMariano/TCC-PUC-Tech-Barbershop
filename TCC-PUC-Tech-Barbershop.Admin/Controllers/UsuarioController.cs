@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
@@ -17,12 +18,15 @@ public class UsuarioController : Controller
 
     public IActionResult VisualizarPerfil(int? id = null)
     {
-        if (id == null)
+        if (id == null || id == 0)
         {
             int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
             id = cookieId;
 
-            Usuario usuario = _dbContext.Usuarios
+            if (id == null || id == 0)
+                return RedirectToAction("Index", "Home");
+
+             Usuario usuario = _dbContext.Usuarios
             .Where(u => u.Id == id)
             .Include(u => u.Informacoes)
             .Include(u => u.Endereco)
@@ -139,11 +143,70 @@ public class UsuarioController : Controller
 
         await _dbContext.SaveChangesAsync();
 
-        return RedirectToAction("VisualizarPerfil", "Usuario", BarbeiroId);
+        return RedirectToAction("Index", "Home");
     }
 
-    public IActionResult Deletar()
+    public async Task<IActionResult> DeletarAsync()
     {
-        return RedirectToAction("Index", "Home");
+        try
+        {
+            int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+
+            var usuario = _dbContext.Usuarios
+            .Where(u => u.Id == cookieId)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .FirstOrDefault();
+
+            if (usuario.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            {
+                usuario.Atendimentos = _dbContext.Atendimentos
+                   .Where(a => a.BarbeiroId == usuario.Id)
+                   .ToList();
+
+                usuario.Comentarios = _dbContext.Comentarios
+                .Where(a => a.BarbeiroId == usuario.Id)
+                .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+                .ToList();
+            }
+            else
+            {
+                usuario.Atendimentos = _dbContext.Atendimentos
+                   .Where(a => a.ClienteId == usuario.Id)
+                   .ToList();
+
+                usuario.Comentarios = _dbContext.Comentarios
+                .Where(a => a.ClienteId == usuario.Id)
+                .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+                .ToList();
+            }
+
+            foreach (var atendimento in usuario.Atendimentos.ToList())
+            {
+                _dbContext.Atendimentos.Remove(atendimento);
+            }
+
+            foreach (var comentario in usuario.Comentarios.ToList())
+            {
+                _dbContext.Comentarios.Remove(comentario);
+            }
+
+            if (usuario != null)
+            {
+                _dbContext.Usuarios.Remove(usuario);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home");
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 }
