@@ -1,23 +1,81 @@
-﻿@{
+﻿@using System.Security.Claims;
+@model TCC_PUC_Tech_Barbershop.Admin.Models.Usuario
+
+@{
     ViewData["Title"] = "Editar Atendimento";
 }
 
-<div class="modal fade" tabindex="-1" role="dialog" id="editarAtendimentoModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Editar Atendimento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>EDITAR.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Atualizar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-            </div>
+<h2>Editar Atendimento</h2>
+
+<form id="formEditarAgendamento" method="post" action="Editar">
+    <div class="row">
+        <div class="col-9">
+            @if (User.Identity.IsAuthenticated && User.HasClaim(ClaimTypes.Role, "Cliente"))
+            {
+                <label for="exampleInputName">Barbeiro</label>
+            }
+            else
+            {
+                <label for="exampleInputName">Cliente</label>
+            }
+        </div>
+        <div class="col-3">
+            <label for="exampleInputName">Data e Hora</label>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-9">
+            <div class="btn-group w-100">
+                @if (User.HasClaim(ClaimTypes.Role, "Cliente"))
+                {
+                    <select class="btn btn-primary dropdown-toggle" name="BarbeiroId" id="Barbeiro" asp-for="@Model.Atendimento.Barbeiro.Id">
+                        @foreach (var usuario in Model.Usuarios)
+                        {
+                            <option value="@usuario.Id">
+                                @usuario.Informacoes.Nome
+                                @usuario.Informacoes.Sobrenome -
+                                @usuario.Contato.Celular -
+                                @usuario.Endereco.Cidade /
+                                @usuario.Endereco.Estado,
+                                @usuario.Endereco.Bairro
+                            </option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select class="btn btn-primary dropdown-toggle" name="ClienteId" id="Barbeiro" asp-for="@Model.Atendimento.Cliente.Id">
+                        @foreach (var usuario in Model.Usuarios)
+                        {
+                            <option value="@usuario.Id">
+                                @usuario.Informacoes.Nome
+                                @usuario.Informacoes.Sobrenome -
+                                @usuario.Contato.Celular -
+                                @usuario.Endereco.Cidade /
+                                @usuario.Endereco.Estado,
+                                @usuario.Endereco.Bairro
+                            </option>
+                        }
+                    </select>
+                }
+            </div>
+        </div>
+
+        <div class="col-3">
+            <input type="datetime-local" class="form-control" placeholder="DataHora" name="DataHora" value="@Model.Atendimento.DataHora.ToString("yyyy-MM-ddTHH:mm")">
+        </div>
+    </div>
+
+    <input type="hidden" name="Id" value="@Model.Atendimento.Id" />
+
+    <hr />
+
+    @if (Model?.Usuarios != null || @ViewBag.BarbeiroId != null)
+    {
+        <div class="d-flex justify-content-center">
+            <button type="reset" class="btn btn-secondary">Limpar</button>
+            <button type="submit" class="btn btn-primary mx-2">Editar</button>
+        </div>
+    }
+</form>

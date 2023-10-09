@@ -76,9 +76,12 @@ else
             @if (atendimento.DataHora > DateTime.Now)
             {
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#editarAtendimentoModal">
-                        Editar
-                    </button>
+                    <form method="get" asp-controller="Atendimento" asp-action="EditarAtendimento">
+                        <input type="hidden" name="AtendimentoId" value="@atendimento.Id" />
+                        <button type="submit" class="btn btn-secondary btn-block">
+                            Editar
+                        </button>
+                    </form>
                 </div>
 
                 <div class="col-md-2">
@@ -95,10 +98,6 @@ else
 
 <div id="detalhesAgendamentoContainer">
     @Html.Partial("DetalhesAtendimento")
-</div>
-
-<div id="editarAgendamentoContainer">
-    @Html.Partial("EditarAtendimento")
 </div>
 
 <div id="cancelarAgendamentoContainer">

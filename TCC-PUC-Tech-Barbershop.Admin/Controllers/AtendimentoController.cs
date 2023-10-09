@@ -130,6 +130,55 @@ public class AtendimentoController : Controller
         }
     }
 
+    public IActionResult EditarAtendimento(int AtendimentoId)
+    {
+        Usuario usuario = new Usuario();
+
+        usuario.Atendimento = _dbContext.Atendimentos
+        .Where(u => u.Id == AtendimentoId)
+        .Include(u => u.Cliente)
+            .ThenInclude(c => c.Informacoes)
+        .Include(u => u.Cliente)
+            .ThenInclude(c => c.Endereco)
+        .Include(u => u.Cliente)
+            .ThenInclude(c => c.Contato)
+        .Include(u => u.Barbeiro)
+            .ThenInclude(b => b.Informacoes)
+        .Include(u => u.Cliente)
+            .ThenInclude(b => b.Endereco)
+        .Include(u => u.Cliente)
+            .ThenInclude(b => b.Contato)
+        .FirstOrDefault();
+
+        if (User.HasClaim(ClaimTypes.Role, "Cliente"))
+        {
+            List<Usuario> barbeiros = _dbContext.Usuarios
+            .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .ToList();
+
+            if (barbeiros.Count() > 0)
+                usuario.Usuarios = barbeiros;
+
+            return View(usuario);
+        }
+        else
+        {
+            List<Usuario> barbeiros = _dbContext.Usuarios
+            .Where(u => u.TipoUsuario == TipoUsuarioEnum.Cliente)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .ToList();
+
+            if (barbeiros.Count() > 0)
+                usuario.Usuarios = barbeiros;
+
+            return View(usuario);
+        }
+    }
 
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
@@ -150,6 +199,39 @@ public class AtendimentoController : Controller
         await _dbContext.SaveChangesAsync();
 
         return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<dynamic>> Editar(Atendimento model)
+    {
+        try
+        {
+            var atendimentoExistente = await _dbContext.Atendimentos.FindAsync(model.Id);
+
+            if (atendimentoExistente != null)
+            {
+
+                if(User.HasClaim(ClaimTypes.Role, "Cliente"))
+                    atendimentoExistente.BarbeiroId = model.BarbeiroId;
+                else
+                    atendimentoExistente.ClienteId = model.ClienteId;
+                atendimentoExistente.DataHora = model.DataHora;
+
+                _dbContext.Update(atendimentoExistente);
+                await _dbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        catch (DbUpdateException ex)
+        {
+            ModelState.AddModelError("", "Erro ao atualizar o atendimento.");
+            return View(model);
+        }
     }
 
     [HttpPost]

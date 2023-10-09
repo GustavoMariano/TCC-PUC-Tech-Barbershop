@@ -24,6 +24,8 @@ public class Usuario
     [NotMapped]
     public List<Usuario> Usuarios { get; set; }
     [NotMapped]
+    public Atendimento Atendimento { get; set; }
+    [NotMapped]
     [ForeignKey("BarbeiroId")]
     public virtual List<Comentario> Comentarios { get; set; }
 
