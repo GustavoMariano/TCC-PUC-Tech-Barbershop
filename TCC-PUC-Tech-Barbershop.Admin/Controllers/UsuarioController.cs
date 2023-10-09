@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 using TCC_PUC_Tech_Barbershop.Admin.Infra;
 using TCC_PUC_Tech_Barbershop.Admin.Models;
 
@@ -20,16 +21,53 @@ public class UsuarioController : Controller
         {
             int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
             id = cookieId;
+
+            Usuario usuario = _dbContext.Usuarios
+            .Where(u => u.Id == id)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .FirstOrDefault();
+
+            if (usuario.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            {
+                usuario.Atendimentos = _dbContext.Atendimentos
+               .Where(a => a.BarbeiroId == usuario.Id)
+               .ToList();
+
+                usuario.Comentarios = _dbContext.Comentarios
+                .Where(a => a.BarbeiroId == usuario.Id)
+                .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+                .ToList();
+            }
+
+            return View(usuario);
         }
+        else
+        {
+            Usuario usuario = _dbContext.Usuarios
+            .Where(u => u.Id == id)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .FirstOrDefault();
 
-        Usuario usuario = _dbContext.Usuarios
-        .Where(u => u.Id == id)
-        .Include(u => u.Informacoes)
-        .Include(u => u.Endereco)
-        .Include(u => u.Contato)
-        .FirstOrDefault();
+            if (usuario.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+            {
+                usuario.Atendimentos = _dbContext.Atendimentos
+               .Where(a => a.BarbeiroId == usuario.Id)
+               .ToList();
 
-        return View(usuario);
+                usuario.Comentarios = _dbContext.Comentarios
+                .Where(a => a.BarbeiroId == usuario.Id)
+                .Include(u => u.Cliente)
+                .ThenInclude(c => c.Informacoes)
+                .ToList();
+            }
+
+            return View(usuario);
+        }
     }
 
     public IActionResult EditarPerfil()
@@ -90,6 +128,18 @@ public class UsuarioController : Controller
             ModelState.AddModelError("", "Erro ao atualizar o usuário.");
             return View(usuario);
         }
+    }
+
+    public async Task<IActionResult> ComentarAsync(string Texto, int BarbeiroId)
+    {
+        int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
+        Comentario comentario = new Comentario() { BarbeiroId = BarbeiroId, ClienteId = cookieId, Texto = Texto };
+
+        _dbContext.Comentarios.Add(comentario);
+
+        await _dbContext.SaveChangesAsync();
+
+        return RedirectToAction("VisualizarPerfil", "Usuario", BarbeiroId);
     }
 
     public IActionResult Deletar()

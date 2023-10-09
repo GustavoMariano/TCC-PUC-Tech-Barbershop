@@ -78,31 +78,63 @@
             </h5>
         </div>
     </div>
-    <hr />
 
     @if (Model.TipoUsuario == TipoUsuarioEnum.Barbeiro)
     {
+        <hr />
+
+        <h2>Formas aceitas</h2>
         if (!string.IsNullOrEmpty(Model.FormasPagamentos))
         {
-            <h2>Formas aceitas</h2>
             <h5>
                 @Model.FormasPagamentos
             </h5>
         }
 
-        if (Model.Comentarios != null)
+        <hr />
+
+        <h2>Atendimentos futuros</h2>
+        if (Model.Atendimentos != null)
         {
-            <h2>Cometários</h2>
-            @foreach (var item in Model.Comentarios)
+            @foreach (var item in Model.Atendimentos)
             {
                 <h5>
-                    item.Texto;
+                    @item.Barbeiro.Informacoes.Nome | @item.DataHora.ToString("dd/MM/yyyy HH:mm tt")
                 </h5>
+            }
+        }
+
+        <hr />
+
+        <h2>Cometários</h2>
+
+        <br />
+
+        @if (User.Identity.IsAuthenticated && Model.Id != int.Parse(User.FindFirstValue("Id")))
+        {
+            <form method="post" asp-controller="Usuario" asp-action="Comentar">
+                <div class="d-flex justify-content-center">
+                    <input type="text" class="form-control" placeholder="Comentario" name="Texto">
+                    <input type="hidden" name="BarbeiroId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary mx-2">Adicionar Comentário</button>
+                </div>
+            </form>
+            <hr />
+        }
+
+        if (Model.Comentarios != null)
+        {
+            @foreach (var item in Model.Comentarios)
+            {
+                <h5> @item.Cliente.Informacoes.Nome </h5>
+                @item.Texto
+                
+                <hr />
             }
         }
     }
 
-    @if (Model.Id == int.Parse(User.FindFirstValue("Id")))
+    @if (User.Identity.IsAuthenticated && Model.Id == int.Parse(User.FindFirstValue("Id")))
     {
         <div class="d-flex justify-content-center">
             <a class="link text-dark" asp-area="" asp-controller="Usuario" asp-action="EditarPerfil">
