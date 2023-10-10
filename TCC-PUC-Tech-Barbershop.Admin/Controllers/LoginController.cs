@@ -64,6 +64,14 @@ public class LoginController : Controller
     [HttpPost]
     public IActionResult CadastrarUsuario(Usuario cliente, IFormFile Imagem)
     {
+        var existingUser = _dbContext.Usuarios.FirstOrDefault(u => u.Login == cliente.Login);
+
+        if (existingUser != null)
+        {
+            ModelState.AddModelError(string.Empty, "Login já está sendo usado, tente outro.");
+            return View("Cadastrar", existingUser);
+        }
+
         Usuario novoRegistro;
 
         if (cliente.TipoUsuario == TipoUsuarioEnum.Cliente)

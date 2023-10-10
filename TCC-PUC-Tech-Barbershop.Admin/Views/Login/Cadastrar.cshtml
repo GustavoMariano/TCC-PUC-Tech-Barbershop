@@ -169,7 +169,7 @@
     </div>
 
     <hr />
-
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="d-flex justify-content-center">
         <button type="reset" class="btn btn-secondary">Limpar</button>
         <a class="link text-dark" asp-area="" asp-controller="Login" asp-action="#">
