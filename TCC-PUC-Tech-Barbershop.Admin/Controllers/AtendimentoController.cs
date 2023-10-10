@@ -183,15 +183,66 @@ public class AtendimentoController : Controller
     [HttpPost]
     public async Task<ActionResult<dynamic>> CadastrarAtendimento(Atendimento model)
     {
+        var horaAntes = model.DataHora.AddHours(-1);
+        var horaDepois = model.DataHora.AddHours(1);
+
         int.TryParse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value, out var cookieId);
 
         if (model.BarbeiroId != 0)
         {
             model.ClienteId = cookieId;
+
+            var existeAtendimento = await _dbContext.Atendimentos
+           .AnyAsync(a =>
+               a.BarbeiroId == model.BarbeiroId &&
+               a.DataHora >= horaAntes &&
+               a.DataHora <= horaDepois);
+
+            if (existeAtendimento)
+            {
+                List<Usuario> barbeiros = _dbContext.Usuarios
+                .Where(u => u.TipoUsuario == TipoUsuarioEnum.Barbeiro)
+                .Include(u => u.Informacoes)
+                .Include(u => u.Endereco)
+                .Include(u => u.Contato)
+                .ToList();
+
+                Usuario usuario = new();
+
+                if (barbeiros.Count() > 0)
+                    usuario.Usuarios = barbeiros;
+
+                ModelState.AddModelError(string.Empty, "Horário não disponível, verifique a agenda do barbeiro e marque um horário com pelo menos 1 hora de diferença tanto para o atendimento anterior quanto para o próximo atendimento.");
+                return View("Agendar", usuario);
+            }
         }
         else if (model.ClienteId != 0)
         {
             model.BarbeiroId = cookieId;
+
+            var existeAtendimento = await _dbContext.Atendimentos
+           .AnyAsync(a =>
+               a.ClienteId == model.ClienteId &&
+               a.DataHora >= horaAntes &&
+               a.DataHora <= horaDepois);
+
+            if (existeAtendimento)
+            {
+                List<Usuario> barbeiros = _dbContext.Usuarios
+            .Where(u => u.TipoUsuario == TipoUsuarioEnum.Cliente)
+            .Include(u => u.Informacoes)
+            .Include(u => u.Endereco)
+            .Include(u => u.Contato)
+            .ToList();
+
+                Usuario usuario = new();
+
+                if (barbeiros.Count() > 0)
+                    usuario.Usuarios = barbeiros;
+
+                ModelState.AddModelError(string.Empty, "Horário não disponível, o cliente já possui um atendimento agendado com menos de uma hora de diferença em relação ao horário escolhido.");
+                return View("Agendar", usuario);
+            }
         }
 
         _dbContext.Atendimentos.Add(model);
@@ -211,7 +262,7 @@ public class AtendimentoController : Controller
             if (atendimentoExistente != null)
             {
 
-                if(User.HasClaim(ClaimTypes.Role, "Cliente"))
+                if (User.HasClaim(ClaimTypes.Role, "Cliente"))
                     atendimentoExistente.BarbeiroId = model.BarbeiroId;
                 else
                     atendimentoExistente.ClienteId = model.ClienteId;

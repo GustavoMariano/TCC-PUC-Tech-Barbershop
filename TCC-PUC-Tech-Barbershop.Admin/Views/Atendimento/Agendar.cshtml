@@ -59,7 +59,7 @@
     </div>
 
     <hr />
-
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @if (Model?.Usuarios != null || @ViewBag.BarbeiroId != null)
     {
         <div class="d-flex justify-content-center">
