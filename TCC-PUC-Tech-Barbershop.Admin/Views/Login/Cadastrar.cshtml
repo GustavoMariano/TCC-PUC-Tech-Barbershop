@@ -26,12 +26,12 @@
     <div class="row">
         <div class="col">
             <label for="exampleInputName">Login</label>
-            <input type="text" class="form-control" placeholder="Login" name="Login">
+            <input type="text" class="form-control" placeholder="Login" name="Login" required>
         </div>
 
         <div class="col">
             <label for="exampleInputPassword">Senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha" required>
         </div>
     </div>
 
@@ -52,14 +52,14 @@
     </div>
     <div class="row">
         <div class="col-5">
-            <input type="text" class="form-control" placeholder="Nome" name="Informacoes.Nome">
+            <input type="text" class="form-control" placeholder="Nome" name="Informacoes.Nome" required>
         </div>
         <div class="col-5">
-            <input type="text" class="form-control" placeholder="Sobrenome" name="Informacoes.Sobrenome">
+            <input type="text" class="form-control" placeholder="Sobrenome" name="Informacoes.Sobrenome" required>
         </div>
         <div class="col-2">
             <div class="btn-group">
-                <select class="btn btn-primary dropdown-toggle" name="Informacoes.Sexo" id="Sexo">
+                <select class="btn btn-primary dropdown-toggle" name="Informacoes.Sexo" id="Sexo" required>
                     <option value="NãoSelecionado">Selecione uma opção</option>
                     <option value="Masculino">Masculino</option>
                     <option value="Feminino">Feminino</option>
@@ -76,14 +76,14 @@
     <div class="row">
         <div class="col">
             <label for="exampleInputEmail">Endereço de E-mail</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu e-mail" name="Contato.Email">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Digite seu e-mail" name="Contato.Email" required>
         </div>
         <div class="col">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
             <label for="exampleInputPhoneCellPhone">Telefone/Celular</label>
-            <input type="tel" name="Contato.Celular" id="phoneNumber" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" placeholder="Telefone/Celular">
+            <input type="tel" name="Contato.Celular" id="phoneNumber" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}" class="form-control" placeholder="Telefone/Celular" required>
             <script type="text/javascript">$("#phoneNumber").mask("(00) 0000-00009");</script>
         </div>
     </div>
@@ -108,11 +108,11 @@
     </div>
     <div class="row">
         <div class="col-3">
-            <input type="text" id="cep" class="form-control" placeholder="CEP" name="Endereco.Cep">
+            <input type="text" id="cep" class="form-control" placeholder="CEP" name="Endereco.Cep" required>
             <script type="text/javascript">$("#cep").mask("00.000-000");</script>
         </div>
         <div class="col-3">
-            <select class="btn btn-primary dropdown-toggle" name="Endereco.Estado">
+            <select class="btn btn-primary dropdown-toggle" name="Endereco.Estado" required>
                 <option value="NA">Selecione o Estado</option>
                 <option value="Acre">Acre</option>
                 <option value="Alagoas">Alagoas</option>
@@ -144,10 +144,10 @@
             </select>
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="Cidade" name="Endereco.Cidade">
+            <input type="text" class="form-control" placeholder="Cidade" name="Endereco.Cidade" required>
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="Bairro" name="Endereco.Bairro">
+            <input type="text" class="form-control" placeholder="Bairro" name="Endereco.Bairro" required>
         </div>
     </div>
 
@@ -156,15 +156,15 @@
     <div class="row">
         <div class="col-5">
             <label for="exampleInputName">Logradouro</label>
-            <input type="text" class="form-control" placeholder="Logradouro" name="Endereco.Logradouro">
+            <input type="text" class="form-control" placeholder="Logradouro" name="Endereco.Logradouro" required>
         </div>
         <div class="col-2">
             <label for="exampleInputName">Número</label>
-            <input type="number" class="form-control" placeholder="Número" name="Endereco.Numero">
+            <input type="number" class="form-control" placeholder="Número" name="Endereco.Numero" required>
         </div>
         <div class="col-5">
             <label for="exampleInputName">Complemento</label>
-            <input type="text" class="form-control" placeholder="Complemento" name="Endereco.Complemento">
+            <input type="text" class="form-control" placeholder="Complemento" name="Endereco.Complemento" required>
         </div>
     </div>
 

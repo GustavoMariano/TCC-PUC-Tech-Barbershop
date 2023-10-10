@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-9">
             <div class="btn-group w-100">
-                <select class="btn btn-primary dropdown-toggle" name="@((User.HasClaim(ClaimTypes.Role, "Barbeiro")) ? "ClienteId" : "BarbeiroId")" id="Barbeiro">
+                <select class="btn btn-primary dropdown-toggle" name="@((User.HasClaim(ClaimTypes.Role, "Barbeiro")) ? "ClienteId" : "BarbeiroId")" id="Barbeiro" required>
                     @if (Model == null)
                     {
                         <option value="@ViewBag.BarbeiroId">@ViewBag.BarbeiroInfos</option>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="col-3">
-            <input type="datetime-local" class="form-control" placeholder="DataHora" name="DataHora">
+            <input type="datetime-local" class="form-control" placeholder="DataHora" name="DataHora" required>
         </div>
     </div>
 

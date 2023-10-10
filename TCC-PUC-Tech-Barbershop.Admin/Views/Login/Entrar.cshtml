@@ -11,10 +11,10 @@
 
         <div class="align-content-center">
             <label for="exampleInputUsuario">Usuário</label>
-            <input type="text" class="form-control" id="exampleInputUsuario" placeholder="Usuário" name="Login">
+            <input type="text" class="form-control" id="exampleInputUsuario" placeholder="Usuário" name="Login" required>
 
             <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha" name="Senha" required>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <br />
 

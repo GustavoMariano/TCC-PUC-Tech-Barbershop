@@ -119,7 +119,7 @@
         {
             <form method="post" asp-controller="Usuario" asp-action="Comentar">
                 <div class="d-flex justify-content-center">
-                    <input type="text" class="form-control" placeholder="Comentario" name="Texto">
+                    <input type="text" class="form-control" placeholder="Comentario" name="Texto" required>
                     <input type="hidden" name="BarbeiroId" value="@Model.Id" />
                     <button type="submit" class="btn btn-primary mx-2">Adicionar Comentário</button>
                 </div>
