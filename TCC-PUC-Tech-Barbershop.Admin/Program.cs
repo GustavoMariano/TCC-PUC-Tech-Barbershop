@@ -16,7 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(options =>
 {
-    options.Cookie.Domain = Debugger.IsAttached ? null : $"localhost";
+    options.Cookie.Domain = Debugger.IsAttached ? null : $"gustavomarianotechbarbershop.azurewebsites.net";
     options.Cookie.Name = CookieAuthenticationDefaults.CookiePrefix;
     options.Cookie.IsEssential = true;
     options.Cookie.SameSite = SameSiteMode.Lax;
